@@ -15,9 +15,15 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { DateTimePickerComponent } from './custom-formly/date-time-picker/date-time-picker.component';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatTimepickerModule,
+  NgxMatNativeDateModule,
+} from '@angular-material-components/datetime-picker';
 
 const MaterialComponents = [
-  LayoutModule, 
+  LayoutModule,
   MatToolbarModule,
   MatSidenavModule,
   MatIconModule,
@@ -31,18 +37,15 @@ const MaterialComponents = [
   MatTableModule,
   MatSlideToggleModule,
   MatSortModule,
-  MatPaginatorModule
- ];
-
+  MatPaginatorModule,
+  NgxMatDatetimePickerModule,
+  NgxMatTimepickerModule,
+  NgxMatNativeDateModule,
+];
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    MaterialComponents
-  ],
-  exports: [
-    MaterialComponents
-  ]
+  declarations: [DateTimePickerComponent],
+  imports: [CommonModule, MaterialComponents],
+  exports: [MaterialComponents],
 })
-export class MaterialModule { }
+export class MaterialModule {}
