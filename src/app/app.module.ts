@@ -7,10 +7,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PublicLayoutComponent } from './modules/public/public-layout/public-layout.component';
+import { AdminLayoutComponent } from './modules/admin/admin-layout/admin-layout.component';
+import { MaterialModule } from './modules/shared/material/material.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PublicLayoutComponent,
+    AdminLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     FormlyModule.forRoot({ extras: { lazyRender: true } }),
     FormlyMaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
