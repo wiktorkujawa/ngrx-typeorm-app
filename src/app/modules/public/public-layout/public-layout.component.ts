@@ -3,6 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { FormComponent } from '../components/elements/form/form.component';
 
 @Component({
   selector: 'app-public-layout',
@@ -23,8 +25,26 @@ export class PublicLayoutComponent {
       : this.document.body.classList.remove('alternate-theme');
   }
 
+  openDialog( form: boolean){
+    const ref = this.dialog.open( FormComponent, { 
+      panelClass: 'my-dialog',
+      closeOnNavigation: true, 
+      data: {
+        switched: form
+      }
+    });
+
+    const sub = ref.componentInstance.FormSubmit.subscribe(( success: any) => {
+      console.log(success.data);
+    });
+    ref.afterClosed().subscribe(() => {
+      sub.unsubscribe();
+    });
+  }
+
   constructor(
     private breakpointObserver: BreakpointObserver,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    public dialog: MatDialog
   ) {}
 }

@@ -1,41 +1,59 @@
 <ng-template #menu>
-  <a mat-list-item href="#">Link 1</a>
-  <a mat-list-item href="#">Link 2</a>
-  <a mat-list-item href="#">Link 3</a>
+  <a mat-list-item routerLink="/">Home</a>
+  <a mat-list-item routerLink="/todos">Todos</a>
+  <a mat-list-item [matMenuTriggerFor]="appMenu">Forms</a>
+  <mat-menu #appMenu="matMenu">
+    <a mat-menu-item (click)="openDialog(true)">Form 1</a>
+    <a mat-menu-item (click)="openDialog(false)">Form 2</a>
+  </mat-menu>
 </ng-template>
 
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isMobile$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isMobile$ | async) ? 'over' : 'side'"
-      [opened]="false">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isMobile$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isMobile$ | async) ? 'over' : 'side'"
+    [opened]="false"
+  >
+    <!-- Sidenav content  -->
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <ng-container *ngTemplateOutlet="menu"></ng-container>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <div>
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isMobile$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span style="margin-left: 1rem;">Logo</span>
-    </div>
 
-    <div class="menu">
-      <mat-nav-list *ngIf="!(isMobile$ | async)" class="menu">
-        <ng-container *ngTemplateOutlet="menu"></ng-container>
-      </mat-nav-list>
-      <mat-slide-toggle (change)="onSwitchTheme($event)" ></mat-slide-toggle>
-    </div>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="mb-4">
+      <div>
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isMobile$ | async"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <a mat-button style="margin-left: 1rem" routerLink="/"> <mat-icon>done_outline</mat-icon></a>
+      </div>
+
+      <!-- Menu content -->
+      <div class="menu">
+        <mat-nav-list *ngIf="!(isMobile$ | async)" class="menu">
+          <ng-container *ngTemplateOutlet="menu"></ng-container>
+        </mat-nav-list>
+        <mat-slide-toggle (change)="onSwitchTheme($event)"></mat-slide-toggle>
+      </div>
     </mat-toolbar>
     
-    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+
+    <mat-toolbar color="primary" class="footer">
+      <span>Example app</span>
+    </mat-toolbar>
+    
   </mat-sidenav-content>
 </mat-sidenav-container>
