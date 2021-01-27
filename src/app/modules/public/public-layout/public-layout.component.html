@@ -28,10 +28,14 @@
       <span style="margin-left: 1rem;">Logo</span>
     </div>
 
-      <mat-nav-list class="menu">
+    <div class="menu">
+      <mat-nav-list *ngIf="!(isMobile$ | async)" class="menu">
         <ng-container *ngTemplateOutlet="menu"></ng-container>
       </mat-nav-list>
+      <mat-slide-toggle (change)="onSwitchTheme($event)" ></mat-slide-toggle>
+    </div>
     </mat-toolbar>
+    
     <!-- Add Content Here -->
   </mat-sidenav-content>
 </mat-sidenav-container>
