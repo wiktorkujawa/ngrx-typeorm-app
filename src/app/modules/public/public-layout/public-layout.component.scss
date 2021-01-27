@@ -19,10 +19,15 @@
 
 .menu {
   display: flex;
+  padding: 1rem 1rem;
 
   a {
     &:hover{
       color: red;
     }
   }
+}
+
+mat-slide-toggle {
+  padding: 1.6rem 1rem;
 }
