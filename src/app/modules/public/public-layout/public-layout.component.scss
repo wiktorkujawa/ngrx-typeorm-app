@@ -17,8 +17,6 @@ $hover-color: #FF4136;
 }
 
 .mat-toolbar.mat-primary {
-  // position: sticky;
-  // top: 0;
   z-index: 1;
   justify-content: space-between;
 }
@@ -32,8 +30,7 @@ $hover-color: #FF4136;
 
 .menu {
   display: flex;
-  padding: 1rem 1rem;
-
+  position: relative;
   a {
     &:hover{
       color: $hover-color;
@@ -41,8 +38,16 @@ $hover-color: #FF4136;
   }
 }
 
+.menu-links {
+  display: flex;
+  margin-right: 5rem;
+}
+
 mat-slide-toggle {
-  padding: 1.6rem 1rem;
+  position: absolute;
+  right: 2rem;
+  top:50%;
+  transform: translateY(-50%);
 }
 
 .footer{

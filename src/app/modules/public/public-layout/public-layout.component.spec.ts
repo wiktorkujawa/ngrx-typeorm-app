@@ -8,6 +8,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { PublicLayoutComponent } from './public-layout.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('PublicLayoutComponent', () => {
   let component: PublicLayoutComponent;
@@ -18,13 +21,16 @@ describe('PublicLayoutComponent', () => {
       declarations: [PublicLayoutComponent],
       imports: [
         NoopAnimationsModule,
+        MatMenuModule,
+        MatDialogModule,
         LayoutModule,
         MatButtonModule,
         MatIconModule,
         MatListModule,
         MatSidenavModule,
         MatToolbarModule,
-      ]
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   }));
 

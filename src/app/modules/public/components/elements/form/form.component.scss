@@ -4,9 +4,11 @@ $link-color: #FF4136;
   text-decoration: none;
   display: flex;
   justify-content: space-between;
-  color: $link-color;
   a {
     text-decoration: none;
+    &:hover {
+      color: $link-color;
+    }
   }
 }
 

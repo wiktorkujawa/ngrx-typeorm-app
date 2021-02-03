@@ -1,5 +1,6 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DateTimePickerComponent } from './date-time-picker.component';
 
 describe('DateTimePickerComponent', () => {
@@ -8,7 +9,9 @@ describe('DateTimePickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DateTimePickerComponent ]
+      imports: [ ReactiveFormsModule, FormsModule ],
+      declarations: [ DateTimePickerComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   });
