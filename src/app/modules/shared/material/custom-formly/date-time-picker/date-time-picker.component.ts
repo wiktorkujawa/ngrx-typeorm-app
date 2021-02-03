@@ -7,7 +7,7 @@ import { FieldType } from '@ngx-formly/core';
  templateUrl: './date-time-picker.component.html'
 })
 
-export class DateTimePickerComponent extends FieldType {
+export class DateTimePickerField extends FieldType {
 
   // public formControl: FormControl = new FormControl('');
   public formControl!: FormControl; 

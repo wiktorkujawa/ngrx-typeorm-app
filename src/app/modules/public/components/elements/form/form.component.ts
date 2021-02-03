@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormlyFieldConfig } from '@ngx-formly/core';
@@ -10,6 +10,7 @@ interface FormData {
 
 @Component({
   selector: 'app-form',
+  encapsulation: ViewEncapsulation.None,
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
@@ -51,10 +52,8 @@ export class FormComponent implements OnInit {
       key: 'date',
       type: 'datetimepicker',
       templateOptions: {
-        label: 'Date',
-        placeholder: 'Enter date',
-        required: true,
-        appearance: 'outline'
+        label: 'Enter date',
+        required: true
       }
     }
   ];
