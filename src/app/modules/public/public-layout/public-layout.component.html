@@ -9,6 +9,7 @@
 </ng-template>
 
 <mat-sidenav-container class="sidenav-container">
+
   <mat-sidenav
     #drawer
     class="sidenav"
@@ -24,7 +25,6 @@
     </mat-nav-list>
   </mat-sidenav>
 
-
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="mb-4">
       <div>
@@ -37,23 +37,27 @@
         >
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <a mat-button style="margin-left: 1rem" routerLink="/"> <mat-icon>done_outline</mat-icon></a>
+        <a mat-button class="logo" routerLink="/">
+          <mat-icon>done_outline</mat-icon>
+        </a>
       </div>
 
       <!-- Menu content -->
-      <div class="menu">
-        <mat-nav-list *ngIf="!(isMobile$ | async)" class="menu-links">
-          <ng-container *ngTemplateOutlet="menu"></ng-container>
+        <mat-nav-list class="menu">
+          <div style="display: flex;" *ngIf="!(isMobile$ | async)">
+            <ng-container *ngTemplateOutlet="menu"></ng-container>
+          </div>
+          <a mat-list-item>
+            <mat-slide-toggle (change)="onSwitchTheme($event)"></mat-slide-toggle>
+          </a>
         </mat-nav-list>
-        <mat-slide-toggle (change)="onSwitchTheme($event)"></mat-slide-toggle>
-      </div>
     </mat-toolbar>
-    
+
     <router-outlet></router-outlet>
 
     <mat-toolbar color="primary" class="footer">
       <span>Example app</span>
     </mat-toolbar>
-    
   </mat-sidenav-content>
+
 </mat-sidenav-container>
