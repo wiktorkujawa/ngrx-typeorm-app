@@ -8,9 +8,9 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', async () => {
+  it('should display footer caption', async () => {
     await page.navigateTo();
-    expect(await page.getTitleText()).toEqual('angular-material-template app is running!');
+    expect(await page.getTitleText()).toEqual('Example app');
   });
 
   afterEach(async () => {
