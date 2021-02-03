@@ -42,7 +42,7 @@
 
       <!-- Menu content -->
       <div class="menu">
-        <mat-nav-list *ngIf="!(isMobile$ | async)" class="menu">
+        <mat-nav-list *ngIf="!(isMobile$ | async)" class="menu-links">
           <ng-container *ngTemplateOutlet="menu"></ng-container>
         </mat-nav-list>
         <mat-slide-toggle (change)="onSwitchTheme($event)"></mat-slide-toggle>

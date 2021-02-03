@@ -22,11 +22,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 // Formly modules
 import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 import { FormlyMaterialModule } from '@ngx-formly/material';
-import {
-  NgxMatDatetimePickerModule,
-  NgxMatTimepickerModule,
-  NgxMatNativeDateModule,
-} from '@angular-material-components/datetime-picker';
 
 const MaterialComponents = [
 
@@ -48,9 +43,6 @@ const MaterialComponents = [
   MatPaginatorModule,
   MatFormFieldModule,
   MatDatepickerModule,
-  NgxMatDatetimePickerModule,
-  NgxMatTimepickerModule,
-  NgxMatNativeDateModule,
   FormlyMatDatepickerModule,
   FormlyMaterialModule
 ];

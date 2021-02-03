@@ -35,7 +35,7 @@ export class PublicLayoutComponent {
     });
 
     const sub = ref.componentInstance.FormSubmit.subscribe(( success: any) => {
-      console.log(success.data);
+      console.log(success);
     });
     ref.afterClosed().subscribe(() => {
       sub.unsubscribe();
