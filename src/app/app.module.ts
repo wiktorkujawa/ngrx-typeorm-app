@@ -9,7 +9,7 @@ import { PublicLayoutComponent } from './modules/public/public-layout/public-lay
 import { AdminLayoutComponent } from './modules/admin/admin-layout/admin-layout.component';
 import { MaterialModule } from './modules/shared/material/material.module';
 import { FormComponent } from './modules/public/components/elements/form/form.component';
-import { DateTimePickerComponent } from './modules/shared/material/custom-formly/date-time-picker/date-time-picker.component';
+import { DateTimePickerField } from './modules/shared/material/custom-formly/date-time-picker/date-time-picker.component';
 import { FormlyModule } from '@ngx-formly/core';
 import { HomeComponent } from './modules/public/components/pages/home/home.component';
 
@@ -19,12 +19,12 @@ import { HomeComponent } from './modules/public/components/pages/home/home.compo
     PublicLayoutComponent,
     AdminLayoutComponent,
     FormComponent,
-    DateTimePickerComponent,
+    DateTimePickerField,
     HomeComponent
   ],
   imports: [
     FormlyModule.forRoot({ extras: { lazyRender: true }, types: [
-      { name: 'datetimepicker', component: DateTimePickerComponent },
+      { name: 'datetimepicker', component: DateTimePickerField },
     ] }),
     MaterialModule,
     BrowserModule,
