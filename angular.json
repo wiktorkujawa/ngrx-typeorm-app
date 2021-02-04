@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "angular-material-template"
+  "defaultProject": "angular-material-template",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
