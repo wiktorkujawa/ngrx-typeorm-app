@@ -3,8 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "yarn --cwd server start",
+    "client": "ng serve --open",
+    "server": "yarn --cwd server server",
+    "watch": "yarn --cwd server watch",
+    "dev": "concurrently \"yarn watch\" \"yarn server\" \"yarn client\"",
+    "build": "ng build --prod --output-path dist && yarn --cwd server build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -28,6 +32,7 @@
     "@ngx-formly/core": "^5.0.0",
     "@ngx-formly/material": "^5.0.0",
     "@ngx-formly/schematics": "^5.10.12",
+    "concurrently": "^5.3.0",
     "moment": "^2.29.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
