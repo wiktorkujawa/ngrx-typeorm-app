@@ -6,8 +6,8 @@ import {createConnection} from "typeorm";
 import express from "express";
 import bodyParser from "body-parser";
 import {Request, Response} from "express";
-import {Routes} from "./routes";
-import {User} from "./entity/User";
+import {Routes} from "./routes/routes";
+// import {User} from "./entity/User";
 
 createConnection({
   type: "mongodb",
@@ -30,7 +30,7 @@ createConnection({
      migrationsDir: __dirname+"/migration",
      subscribersDir: __dirname+"/subscriber"
   }
-}).then(async connection => {
+}).then(async () => {
 
     // create express app
     const app = express();
@@ -51,22 +51,16 @@ createConnection({
 
     // setup express app here
     // ...
+    app.use(express.static(path.join(__dirname, '../dist')));
+
+    app.get('*', (_, res) => { 
+        res.sendFile(path.join(__dirname, '../dist/index.html')) 
+    }); 
+
+    
 
     // start express server
-    app.listen(3000);
-
-    // insert new users for test
-    await connection.manager.save(connection.manager.create(User, {
-        firstName: "Timber",
-        lastName: "Saw",
-        age: 27
-    }));
-    await connection.manager.save(connection.manager.create(User, {
-        firstName: "Phantom",
-        lastName: "Assassin",
-        age: 24
-    }));
-
-    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
+    const PORT = process.env.PORT || 3000; 
+    app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 }).catch(error => console.log(error));
