@@ -18,9 +18,11 @@ export class UserController {
         return this.userRepository.save(request.body);
     }
 
-    // async remove(request: Request, _response: Response, _next: NextFunction) {
-    //     let userToRemove = await this.userRepository.findOne(request.params.id);
-    //     await this.userRepository.remove(userToRemove);
-    // }
+    async remove(request: Request, response: Response, _next: NextFunction) {
+        let userToRemove = await this.userRepository.findOne(request.params.id);
+        await this.userRepository.remove(userToRemove!)
+        .then((user) => response.send(`User ${user.firstName} ${user.lastName} removed`))
+        .catch(() => response.send('There is no user to remove'));
+    }
 
 }
