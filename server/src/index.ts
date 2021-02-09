@@ -7,6 +7,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import {Request, Response} from "express";
 import {Routes} from "./routes/routes";
+import cors from 'cors';
 // import {User} from "./entity/User";
 
 createConnection({
@@ -34,6 +35,14 @@ createConnection({
 
     // create express app
     const app = express();
+
+    app.use(
+      cors({
+        origin: "http://localhost:4200",
+        credentials: true
+      })
+    );
+    
     app.use(bodyParser.json());
 
     // register express routes from defined application routes

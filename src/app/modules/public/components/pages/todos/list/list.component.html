@@ -1,8 +1,0 @@
-<mat-grid-list [cols]="cols" [gutterSize]="gutter" [ngStyle]="{'margin': margin}" rowHeight="1:1">
-  <mat-grid-tile *ngFor="let todo of todos">
-    <app-item-list #child 
-      [todo]="todo"
-      >
-    </app-item-list>
-  </mat-grid-tile>
-</mat-grid-list>

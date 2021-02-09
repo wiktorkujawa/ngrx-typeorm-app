@@ -1,6 +1,6 @@
 <ng-template #menu>
   <a mat-list-item routerLink="/">Home</a>
-  <a mat-list-item routerLink="/todos">Todos</a>
+  <a mat-list-item routerLink="/posts">Posts</a>
   <a mat-list-item [matMenuTriggerFor]="appMenu">Forms</a>
   <mat-menu #appMenu="matMenu">
     <a mat-menu-item (click)="openDialog(true)">Form 1</a>
