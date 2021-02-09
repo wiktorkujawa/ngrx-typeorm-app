@@ -12,6 +12,11 @@ import { FormComponent } from './modules/public/components/elements/form/form.co
 import { DateTimePickerField } from './modules/shared/material/custom-formly/date-time-picker/date-time-picker.component';
 import { FormlyModule } from '@ngx-formly/core';
 import { HomeComponent } from './modules/public/components/pages/home/home.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,11 +31,15 @@ import { HomeComponent } from './modules/public/components/pages/home/home.compo
     FormlyModule.forRoot({ extras: { lazyRender: true }, types: [
       { name: 'datetimepicker', component: DateTimePickerField },
     ] }),
+    EffectsModule.forRoot([]),
+    StoreModule.forRoot({}, {}),
+    HttpClientModule,
     MaterialModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -14,10 +14,10 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: 'todos',
+        path: 'posts',
         loadChildren: () =>
-          import('./modules/public/components/pages/todos/todos.module').then(
-            (m) => m.TodosModule
+          import('./modules/public/components/pages/posts/posts.module').then(
+            (m) => m.PostsModule
           ),
       },
     ],

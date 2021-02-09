@@ -1,5 +1,16 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChildren } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
+import { FormlyFieldConfig } from '@ngx-formly/core';
+import { Observable } from 'rxjs';
+import { addPost, loadPosts } from '../../store/actions/post.actions';
+import { Post } from '../../store/model/post';
+import { PostState } from '../../store/reducers/post.reducer';
+import { selectPosts } from '../../store/selectors/post.selectors';
+import { AddPostComponent } from '../add-post/add-post.component';
 
 @Component({
   selector: 'app-list',
@@ -9,6 +20,8 @@ import { Component, OnInit, ViewChildren } from '@angular/core';
 export class ListComponent implements OnInit {
 
   @ViewChildren('child') child:any;
+
+  posts$!: Observable<Post[]>;
 
   cols! : number;
   margin!: string;
@@ -39,26 +52,9 @@ export class ListComponent implements OnInit {
   };
 
 
-  todos =[
-    {
-      id: 1,
-      name: 'John'
-    },
-    {
-      id: 2,
-      name: 'Ted'
-    },
-    {
-      id: 3,
-      name: 'Mat'
-    },
-    {
-      id: 4,
-      name: 'Alex'
-    },
-  ]
-
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(private store: Store<PostState>,
+    public dialog: MatDialog,
+    private breakpointObserver: BreakpointObserver) {
     this.breakpointObserver.observe([
       Breakpoints.XSmall,
       Breakpoints.Small,
@@ -96,7 +92,26 @@ export class ListComponent implements OnInit {
     });
   }
 
+  addModal(){
+    const ref = this.dialog.open(AddPostComponent, { width: '60vw',
+    minWidth:"350px",
+    panelClass: 'my-dialog',
+    });
+    const sub = ref.componentInstance.addPost.subscribe((post:any) => {
+      this.store.dispatch(addPost({ post: post}))
+    });
+      ref.afterClosed().subscribe(() => {
+      sub.unsubscribe();
+    });
+  }
+
   ngOnInit(): void {
+    this.loadNewPosts();
+  }
+
+  loadNewPosts(): void {
+    this.store.dispatch(loadPosts());
+    this.posts$ = this.store.pipe(select(selectPosts));
   }
 
 }
