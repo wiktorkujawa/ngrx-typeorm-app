@@ -18,4 +18,8 @@ export class PostService {
   createPost(model: addPostModel) {
     return this.http.post<Post>(`${environment.apiUrl}/posts`, model);
   }
+
+  removePost(id: string) {
+    return this.http.delete(`${environment.apiUrl}/posts/${id}`, {responseType: 'text'});
+  }
 }

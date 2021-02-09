@@ -3,12 +3,8 @@
   <mat-grid-tile *ngFor="let post of posts$ | async;">
     <app-item-list #child 
       [todo]="post"
+      (deletePost)="deletePost($event)"
       >
     </app-item-list>
   </mat-grid-tile>
 </mat-grid-list>
-
-<!-- <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <formly-form [form]="form" [fields]="fields" [model]="postData"></formly-form>
-  <button class="button" mat-raised-button type="submit" color="primary" [disabled]="!form.valid">Submit </button>
-</form> -->

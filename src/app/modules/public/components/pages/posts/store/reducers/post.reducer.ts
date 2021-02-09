@@ -22,15 +22,24 @@ export const reducer = createReducer(
   initialState,
   on(PostActions.loadPostsSuccess, (state, action) => adapter.setAll(action.posts, state)),
   on(PostActions.loadPostsFailure, (state, {error}) => { 
-    return { ...state, 
+    return { 
+      ...state, 
       error };
     }),
   on(PostActions.addPostSuccess, (state, action) => adapter.addOne(action.post, state)),
   on(PostActions.addPostFailure, (state, {error}) => { 
-    return { ...state, 
-      error };
-    }),
-
+    return { 
+      ...state, 
+      error 
+    };
+  }),
+  on(PostActions.deletePostSuccess, (state, action) => adapter.removeOne(action.id, state)),
+  on(PostActions.deletePostFailure, (state, {error}) => { 
+    return { 
+      ...state, 
+      error 
+    };
+  })
 );
 
 export const {
