@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { addPostModel } from '../../store/model/post';
 
 @Component({
   selector: 'app-add-post',
@@ -10,7 +11,7 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 })
 export class AddPostComponent implements OnInit {
 
-  @Output() addPost: EventEmitter<any> = new EventEmitter();
+  @Output() addPost: EventEmitter<addPostModel> = new EventEmitter();
 
   postData = {
     subject:'',
