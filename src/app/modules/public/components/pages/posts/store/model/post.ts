@@ -3,3 +3,5 @@ export interface Post {
   subject: string,
   content: string
 }
+
+export type addPostModel = Omit<Post, "id">

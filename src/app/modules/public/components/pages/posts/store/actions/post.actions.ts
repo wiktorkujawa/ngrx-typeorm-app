@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Post } from '../model/post';
+import { Post, addPostModel } from '../model/post';
 
 export const loadPosts = createAction(
   'LOAD_POSTS'
@@ -17,7 +17,7 @@ export const loadPostsFailure = createAction(
 
 export const addPost = createAction(
   'ADD_POST',
-  props<{ post: any }>()
+  props<{ post: addPostModel }>()
 );
 
 export const addPostSuccess = createAction(
