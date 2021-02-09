@@ -13,7 +13,7 @@ export class AddPostComponent implements OnInit {
 
   @Output() addPost: EventEmitter<addPostModel> = new EventEmitter();
 
-  postData = {
+  postData: addPostModel = {
     subject:'',
     content:''
   };

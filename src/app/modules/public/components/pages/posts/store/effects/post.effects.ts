@@ -37,6 +37,19 @@ export class PostEffects {
     );
   });
 
+  removePost$ = createEffect(() => {
+    return this.actions$.pipe( 
+
+      ofType(PostActions.deletePost),
+      concatMap((action) =>
+        this.postService.removePost(action.id)
+        .pipe(
+          map(() => PostActions.deletePostSuccess({ id: action.id })),
+          catchError(error => of(PostActions.deletePostFailure({ error }))))
+      )
+    );
+  });
+
 
 
   constructor(private actions$: Actions,

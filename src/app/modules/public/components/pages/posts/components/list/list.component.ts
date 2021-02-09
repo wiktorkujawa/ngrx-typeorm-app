@@ -6,7 +6,7 @@ import { select } from '@ngrx/store';
 import { Store } from '@ngrx/store';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { Observable } from 'rxjs';
-import { addPost, loadPosts } from '../../store/actions/post.actions';
+import { addPost, deletePost, loadPosts } from '../../store/actions/post.actions';
 import { Post } from '../../store/model/post';
 import { PostState } from '../../store/reducers/post.reducer';
 import { selectPosts } from '../../store/selectors/post.selectors';
@@ -103,6 +103,11 @@ export class ListComponent implements OnInit {
       ref.afterClosed().subscribe(() => {
       sub.unsubscribe();
     });
+  }
+
+  deletePost(id:string){
+    this.store.dispatch(deletePost({id:id}));
+    // this.loadNewPosts();
   }
 
   ngOnInit(): void {
