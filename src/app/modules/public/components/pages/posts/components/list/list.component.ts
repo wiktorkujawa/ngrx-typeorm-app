@@ -107,7 +107,6 @@ export class ListComponent implements OnInit {
 
   deletePost(id:string){
     this.store.dispatch(deletePost({id:id}));
-    // this.loadNewPosts();
   }
 
   ngOnInit(): void {

@@ -130,7 +130,6 @@ export class FormComponent implements OnInit {
         password2: this.exampleData.password2
       }});
     this.message$ = this.store.pipe(select(selectUsers));
-    console.log(this.exampleData);
   }
 
   onNoClick() {

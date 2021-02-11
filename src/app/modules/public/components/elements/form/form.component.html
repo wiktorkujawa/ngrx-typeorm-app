@@ -1,16 +1,18 @@
-
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <!-- <button class="close" mat-button (click)="onNoClick()">X</button> -->
-  <h1 mat-dialog-title>Fill the form!</h1>
+<mat-dialog-content class="form">
+  <button class="close" mat-button (click)="onNoClick()">X</button>
+  <h2 mat-dialog-title>Fill the form!</h2>
   <hr>
-  <formly-form [form]="form" [fields]="switched ? firstFormFields : secondFormFields" [model]="exampleData"></formly-form>
-  
-  <div class="switch">
-    <button mat-raised-button type="submit" color="primary" class="btn btn-primary float-right" [disabled]="!form.valid">Submit </button>
-    <a mat-button (click)="switchForms()">{{ switched ? 'To Form 2' : 'To Form 1'}}</a>
-  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <formly-form [form]="form" [fields]="switched ? firstFormFields : secondFormFields" [model]="exampleData"></formly-form>
+    
+    <div class="switch">
+      <button mat-raised-button type="submit" color="primary" class="btn btn-primary float-right" [disabled]="!form.valid">Submit </button>
+      <a mat-button (click)="switchForms()">{{ switched ? 'To Form 2' : 'To Form 1'}}</a>
+    </div>
 
-  <div *ngFor="let msg of message$ | async">
-    {{msg.message}}
-  </div>
-</form>
+    <div *ngFor="let msg of message$ | async">
+      {{msg.message}}
+    </div>
+  </form>
+
+</mat-dialog-content>
