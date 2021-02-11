@@ -5,6 +5,12 @@ import { map, shareReplay } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { FormComponent } from '../components/elements/form/form.component';
+import { User } from 'src/app/auth/models/user';
+import { select, Store } from '@ngrx/store';
+import { UserState } from 'src/app/auth/store/reducers/user.reducer';
+import { register } from 'src/app/auth/store/actions/user.actions';
+import { selectUsers } from 'src/app/auth/store/selectors/user.selectors';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-public-layout',
@@ -12,6 +18,9 @@ import { FormComponent } from '../components/elements/form/form.component';
   styleUrls: ['./public-layout.component.scss'],
 })
 export class PublicLayoutComponent {
+
+  user$!: Observable<User>;
+
   isMobile$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.XSmall)
     .pipe(
@@ -35,7 +44,9 @@ export class PublicLayoutComponent {
     });
 
     const sub = ref.componentInstance.FormSubmit.subscribe(( success: any) => {
-      console.log(success);
+      // this.authService.register(success.data);
+      return this.store.dispatch(register({data: success.data}));
+
     });
     ref.afterClosed().subscribe(() => {
       sub.unsubscribe();
@@ -43,6 +54,8 @@ export class PublicLayoutComponent {
   }
 
   constructor(
+    private authService: AuthService,
+    private store: Store<UserState>,
     private breakpointObserver: BreakpointObserver,
     @Inject(DOCUMENT) private document: Document,
     public dialog: MatDialog

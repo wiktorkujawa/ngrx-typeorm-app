@@ -1,25 +1,25 @@
 import {UserController} from "../controller/UserController";
 
 export const userRoute = [{
-    method: "get",
-    route: "/users",
+    method: "post",
+    route: "/login",
     controller: UserController,
-    action: "all"
-}, {
-    method: "get",
-    route: "/users/:id",
-    controller: UserController,
-    action: "one"
+    action: "login"
 }, {
     method: "post",
-    route: "/users",
+    route: "/register",
     controller: UserController,
-    action: "save"
+    action: "register"
+}, {
+    method: "get",
+    route: "/user",
+    controller: UserController,
+    action: "getUser"
 }
 , {
-    method: "delete",
-    route: "/users/:id",
+    method: "get",
+    route: "/logout",
     controller: UserController,
-    action: "remove"
+    action: "logout"
 }
 ];

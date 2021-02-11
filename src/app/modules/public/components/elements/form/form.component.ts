@@ -1,11 +1,14 @@
-import { Component, EventEmitter, Inject, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { select, Store } from '@ngrx/store';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { Observable } from 'rxjs';
+import { selectUsers } from 'src/app/auth/store/selectors/user.selectors';
 
 interface FormData {
   switched: boolean,
-  data: object
+  data: any
 }
 
 @Component({
@@ -16,14 +19,17 @@ interface FormData {
 })
 export class FormComponent implements OnInit {
 
-  
   @Output() FormSubmit: EventEmitter<FormData> = new EventEmitter();
   form = new FormGroup({});
   exampleData = { 
     email:'',
+    displayName:'',
     password:'',
+    password2:'',
     date:''
 };
+
+  message$!: Observable<any>;
 
   switched!: boolean; 
   firstFormFields: FormlyFieldConfig[] = [
@@ -70,6 +76,16 @@ export class FormComponent implements OnInit {
       }
     },
     {
+      key: 'displayName',
+      type: 'input',
+      templateOptions: {
+        label: 'Name',
+        placeholder: 'Enter name',
+        required: true,
+        appearance: 'outline'
+      }
+    },
+    {
       key: 'password',
       type: 'input',
       templateOptions: {
@@ -79,10 +95,22 @@ export class FormComponent implements OnInit {
         required: true,
         appearance: 'outline'
       }
+    },
+    {
+      key: 'password2',
+      type: 'input',
+      templateOptions: {
+        type: 'password',
+        label: 'Confirm password',
+        placeholder: 'Confirm password',
+        required: true,
+        appearance: 'outline'
+      }
     }
   ];
 
   constructor(
+    private store: Store,
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) 
     public data:any) { }
@@ -93,7 +121,16 @@ export class FormComponent implements OnInit {
   
 
   onSubmit(){
-    this.FormSubmit.emit({switched: this.switched, data: this.exampleData});
+    this.FormSubmit.emit({
+      switched: this.switched, 
+      data: {
+        email: this.exampleData.email,
+        displayName: this.exampleData.displayName,
+        password: this.exampleData.password,
+        password2: this.exampleData.password2
+      }});
+    this.message$ = this.store.pipe(select(selectUsers));
+    console.log(this.exampleData);
   }
 
   onNoClick() {
