@@ -8,7 +8,9 @@ import bodyParser from "body-parser";
 import {Request, Response} from "express";
 import {Routes} from "./routes/routes";
 import cors from 'cors';
-// import {User} from "./entity/User";
+import passport from 'passport';
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
 
 createConnection({
   type: "mongodb",
@@ -36,14 +38,34 @@ createConnection({
     // create express app
     const app = express();
 
+    app.use(cookieParser());
+    app.use(bodyParser.urlencoded({
+      extended: false
+    }));
+    app.use(bodyParser.json());
+
     app.use(
       cors({
         origin: "http://localhost:4200",
         credentials: true
       })
     );
+
+    // Express session
+    // const secret = parseString(process.env.sessionSecret);
+    app.use(
+      session({
+        secret: 'test',
+        resave: true,
+        saveUninitialized: true
+      })
+    );
+
+    app.use(passport.initialize());
+    app.use(passport.session());
+
     
-    app.use(bodyParser.json());
+    
 
     // register express routes from defined application routes
     Routes.forEach(route => {
