@@ -37,15 +37,13 @@ export class PublicLayoutComponent {
   openDialog( form: boolean){
     const ref = this.dialog.open( FormComponent, { 
       panelClass: 'my-dialog',
-      closeOnNavigation: true, 
       data: {
         switched: form
       }
     });
 
     const sub = ref.componentInstance.FormSubmit.subscribe(( success: any) => {
-      // this.authService.register(success.data);
-      return this.store.dispatch(register({data: success.data}));
+      this.store.dispatch(register({data: success.data}));
 
     });
     ref.afterClosed().subscribe(() => {
