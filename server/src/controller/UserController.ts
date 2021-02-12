@@ -5,7 +5,6 @@ import passport from 'passport';
 import bcrypt from 'bcryptjs';
 require('../passport/local')(passport);
 
-
 export class UserController {
 
     private userRepository = getRepository(User);
@@ -24,7 +23,10 @@ export class UserController {
         if (err) { 
           return response.status(501).json(err); 
         }
-        return response.status(200).json({message:'Login Success'});
+
+        return Promise.all([user])
+        .then( data => response.status(200).json(data))
+        .catch( error => response.status(403).json(error));
       });
       
       })(request, response, next);
@@ -65,8 +67,8 @@ export class UserController {
         }
     }
 
-    async getUser(request: Request, response: Response, _next: NextFunction) {
-      return response.status(200).json(request.user);
+    async getUser(request: Request, _response: Response, _next: NextFunction) {
+        return Promise.all([request.user])
     }
 
     async logout(request: Request, response: Response, _next: NextFunction) {

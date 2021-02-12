@@ -25,8 +25,7 @@ export class FormComponent implements OnInit {
     email:'',
     displayName:'',
     password:'',
-    password2:'',
-    date:''
+    password2:''
 };
 
   message$!: Observable<any>;
@@ -52,14 +51,6 @@ export class FormComponent implements OnInit {
         placeholder: 'Enter password',
         required: true,
         appearance: 'outline'
-      }
-    },
-    {
-      key: 'date',
-      type: 'datetimepicker',
-      templateOptions: {
-        label: 'Enter date',
-        required: true
       }
     }
   ];

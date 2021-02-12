@@ -18,13 +18,14 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // Formly modules
 import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 
 const MaterialComponents = [
-
+  MatSnackBarModule,
   LayoutModule,
   MatInputModule,
   MatToolbarModule,

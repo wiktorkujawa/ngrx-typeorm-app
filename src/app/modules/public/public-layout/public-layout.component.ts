@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -8,8 +8,8 @@ import { FormComponent } from '../components/elements/form/form.component';
 import { User } from 'src/app/auth/models/user';
 import { select, Store } from '@ngrx/store';
 import { UserState } from 'src/app/auth/store/reducers/user.reducer';
-import { register } from 'src/app/auth/store/actions/user.actions';
-import { selectUsers } from 'src/app/auth/store/selectors/user.selectors';
+import { loadUser, login, register } from 'src/app/auth/store/actions/user.actions';
+import { selectUser } from 'src/app/auth/store/selectors/user.selectors';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
@@ -17,10 +17,11 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   templateUrl: './public-layout.component.html',
   styleUrls: ['./public-layout.component.scss'],
 })
-export class PublicLayoutComponent {
+export class PublicLayoutComponent implements OnInit {
 
-  user$!: Observable<User>;
+  user$!: Observable<any>;
 
+  test: any;
   isMobile$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.XSmall)
     .pipe(
@@ -43,7 +44,9 @@ export class PublicLayoutComponent {
     });
 
     const sub = ref.componentInstance.FormSubmit.subscribe(( success: any) => {
-      this.store.dispatch(register({data: success.data}));
+      success.switched ?
+      this.store.dispatch(login({data: success.data}))
+      : this.store.dispatch(register({data: success.data}))
 
     });
     ref.afterClosed().subscribe(() => {
@@ -58,4 +61,14 @@ export class PublicLayoutComponent {
     @Inject(DOCUMENT) private document: Document,
     public dialog: MatDialog
   ) {}
+  ngOnInit(): void {
+    this.loadUser();
+
+  }
+
+
+  loadUser(): void {
+    this.store.dispatch(loadUser());
+    this.user$ = this.store.pipe(select(selectUser));
+  }
 }

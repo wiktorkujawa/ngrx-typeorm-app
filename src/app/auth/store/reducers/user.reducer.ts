@@ -10,7 +10,7 @@ export interface UserState extends EntityState<User>  {
 }
 
 export const adapter: EntityAdapter<User> = createEntityAdapter<User>({
-  selectId: (user:any) => user.message
+  selectId: () => 'user'
 })
 
 export const initialState: UserState = adapter.getInitialState({
@@ -20,7 +20,7 @@ export const initialState: UserState = adapter.getInitialState({
 
 export const reducer = createReducer(
   initialState,
-  on(UserActions.loadUserSuccess, (state, action) => adapter.setOne(action.data, state)),
+  on(UserActions.loadUserSuccess, (state, action) => adapter.setOne(action.user[0], state)),
   on(UserActions.loadUserFailure, (state, {error}) => {
     return { ...state,
       error
@@ -38,7 +38,7 @@ export const reducer = createReducer(
     }
   }),
 
-  on(UserActions.loginSuccess, (state, action) => adapter.setOne(action.data, state)),
+  on(UserActions.loginSuccess, (state, action) => adapter.setOne(action.data[0], state)),
   on(UserActions.loginFailure, (state, {error}) => {
     return { ...state,
       error
