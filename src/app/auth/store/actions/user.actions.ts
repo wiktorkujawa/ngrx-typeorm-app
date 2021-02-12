@@ -7,7 +7,7 @@ export const loadUser = createAction(
 
 export const loadUserSuccess = createAction(
   'LOAD_USER_SUCCESS',
-  props<{ data: any }>()
+  props<{ user: any }>()
 );
 
 export const loadUserFailure = createAction(

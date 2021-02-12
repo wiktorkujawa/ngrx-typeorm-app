@@ -53,6 +53,10 @@
         </mat-nav-list>
     </mat-toolbar>
 
+    
+    <div *ngIf="(user$ | async)[0] == null">
+      Not Logged
+    </div>
     <router-outlet></router-outlet>
 
     <mat-toolbar color="primary" class="footer">

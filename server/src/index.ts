@@ -37,7 +37,13 @@ createConnection({
 
     // create express app
     const app = express();
-
+    
+    app.use(function(req, res, next) {
+      if (!req.user)
+          res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+      next();
+    });
+    
     app.use(cookieParser());
     app.use(bodyParser.urlencoded({
       extended: false

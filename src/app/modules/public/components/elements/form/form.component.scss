@@ -12,6 +12,11 @@ $link-color: #FF4136;
   }
 }
 
+.message {
+  text-align: center;
+  color: $link-color;
+}
+
 .close {
   position: absolute;
   right: 0;
