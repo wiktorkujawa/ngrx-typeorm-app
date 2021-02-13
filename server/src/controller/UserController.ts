@@ -4,6 +4,7 @@ import {User} from "../entity/User";
 import passport from 'passport';
 import bcrypt from 'bcryptjs';
 require('../passport/local')(passport);
+require('../passport/google')(passport);
 
 export class UserController {
 
@@ -16,7 +17,7 @@ export class UserController {
           return response.status(501).json(err); 
         }
         if (!user) { 
-          return response.status(501).json(info); 
+          return response.status(501).json([info]); 
         }
 
         request.logIn(user, function(err) {
@@ -26,7 +27,7 @@ export class UserController {
 
         return Promise.all([user])
         .then( data => response.status(200).json(data))
-        .catch( error => response.status(403).json(error));
+        .catch( error => response.status(403).json([error]));
       });
       
       })(request, response, next);
@@ -71,9 +72,9 @@ export class UserController {
         return Promise.all([request.user])
     }
 
-    async logout(request: Request, response: Response, _next: NextFunction) {
-        request.logout();
-        return response.status(200).json({message:'Logout success'});
+    async logout(request: Request, _response: Response, _next: NextFunction) {
+      request.logout();
+      return Promise.all([{message:'Logout success'}]);
     }
 
 }

@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import path from 'path';
 dotenv.config({ path: path.join(__dirname,'../.env' )});
 import {createConnection} from "typeorm";
-import express from "express";
+import express, { NextFunction } from "express";
 import bodyParser from "body-parser";
 import {Request, Response} from "express";
 import {Routes} from "./routes/routes";
@@ -11,6 +11,8 @@ import cors from 'cors';
 import passport from 'passport';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
+
+const secret: string = (process.env.sessionSecret as string);
 
 createConnection({
   type: "mongodb",
@@ -38,7 +40,7 @@ createConnection({
     // create express app
     const app = express();
     
-    app.use(function(req, res, next) {
+    app.use(function(req: Request, res: Response, next: NextFunction) {
       if (!req.user)
           res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
       next();
@@ -58,10 +60,9 @@ createConnection({
     );
 
     // Express session
-    // const secret = parseString(process.env.sessionSecret);
     app.use(
       session({
-        secret: 'test',
+        secret: secret,
         resave: true,
         saveUninitialized: true
       })

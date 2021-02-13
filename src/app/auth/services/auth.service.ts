@@ -32,7 +32,11 @@ export class AuthService {
   }
 
   logout(){
-    return this.http.get(`${environment.apiUrl}/logout`);
+    return this.http.get(`${environment.apiUrl}/logout`, {
+      observe:'body',
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    });
   }
 
 

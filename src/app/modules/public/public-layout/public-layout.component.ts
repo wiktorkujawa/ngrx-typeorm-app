@@ -8,9 +8,8 @@ import { FormComponent } from '../components/elements/form/form.component';
 import { User } from 'src/app/auth/models/user';
 import { select, Store } from '@ngrx/store';
 import { UserState } from 'src/app/auth/store/reducers/user.reducer';
-import { loadUser, login, register } from 'src/app/auth/store/actions/user.actions';
+import { loadUser, login, logout, register } from 'src/app/auth/store/actions/user.actions';
 import { selectUser } from 'src/app/auth/store/selectors/user.selectors';
-import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-public-layout',
@@ -21,7 +20,6 @@ export class PublicLayoutComponent implements OnInit {
 
   user$!: Observable<any>;
 
-  test: any;
   isMobile$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.XSmall)
     .pipe(
@@ -35,9 +33,10 @@ export class PublicLayoutComponent implements OnInit {
       : this.document.body.classList.remove('alternate-theme');
   }
 
-  openDialog( form: boolean){
+  AuthDialog( form: boolean){
     const ref = this.dialog.open( FormComponent, { 
       panelClass: 'my-dialog',
+      closeOnNavigation: true,
       data: {
         switched: form
       }
@@ -54,8 +53,12 @@ export class PublicLayoutComponent implements OnInit {
     });
   }
 
+
+  logout() {
+    this.store.dispatch(logout());
+  }
+
   constructor(
-    private authService: AuthService,
     private store: Store<UserState>,
     private breakpointObserver: BreakpointObserver,
     @Inject(DOCUMENT) private document: Document,
