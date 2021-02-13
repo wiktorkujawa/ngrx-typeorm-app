@@ -37,6 +37,18 @@ export class UserEffects {
     );
   });
 
+  logout$ = createEffect(() => {
+    return this.actions$.pipe( 
+      ofType(UserActions.logout),
+      switchMap(() =>
+        this.authService.logout()
+        .pipe(
+          map(data=> UserActions.logoutSuccess({ data })),
+          catchError(error => of(UserActions.loadUserFailure({ error }))))
+      )
+    );
+  });
+
   
   loadUser$ = createEffect(() => {
     return this.actions$.pipe( 

@@ -38,14 +38,16 @@ export const reducer = createReducer(
     }
   }),
 
-  on(UserActions.loginSuccess, (state, action) => adapter.setOne(action.data[0], state)),
+  on(UserActions.loginSuccess, (state, action) => adapter.setOne(action.data[0], {...state,
+    message: state.message
+  })),
   on(UserActions.loginFailure, (state, {error}) => {
     return { ...state,
-      error
+      message: error.error
     }
   }),
 
-  on(UserActions.logoutSuccess, (state, action) => adapter.removeOne(action.data, state)),
+  on(UserActions.logoutSuccess, (state, action) => adapter.removeAll(action.data[0])),
   on(UserActions.logoutFailure, (state, {error}) => {
     return { ...state,
       error
@@ -54,7 +56,7 @@ export const reducer = createReducer(
 
 );
 
-export const selectFeature = (state: UserState) => state.message;
+export const selectMessage = (state: UserState) => state.message;
 export const {
   selectIds,
   selectEntities,

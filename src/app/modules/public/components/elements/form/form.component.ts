@@ -4,7 +4,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { Observable } from 'rxjs';
-import { selectUsers } from 'src/app/auth/store/selectors/user.selectors';
+import { selectMessage } from 'src/app/auth/store/selectors/user.selectors';
 
 interface FormData {
   switched: boolean,
@@ -120,7 +120,8 @@ export class FormComponent implements OnInit {
         password: this.exampleData.password,
         password2: this.exampleData.password2
       }});
-    this.message$ = this.store.pipe(select(selectUsers));
+    this.message$ = this.store.pipe(select(selectMessage));
+    this.message$.subscribe( data => console.log(data));
   }
 
   onNoClick() {

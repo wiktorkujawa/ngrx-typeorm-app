@@ -1,12 +1,28 @@
 <ng-template #menu>
   <a mat-list-item routerLink="/">Home</a>
   <a mat-list-item routerLink="/posts">Posts</a>
-  <a mat-list-item [matMenuTriggerFor]="appMenu">Forms</a>
+
+  <div *ngIf="(user$ | async)[0] == null;then login_button else logout_button" ></div>    
+
+  
+</ng-template>
+
+<ng-template #login_button>
+  <a mat-list-item [matMenuTriggerFor]="appMenu"><mat-icon>login</mat-icon> </a>
   <mat-menu #appMenu="matMenu">
-    <a mat-menu-item (click)="openDialog(true)">Form 1</a>
-    <a mat-menu-item (click)="openDialog(false)">Form 2</a>
+    <a mat-menu-item (click)="AuthDialog(true)">Login</a>
+    <a mat-menu-item (click)="AuthDialog(false)">Register</a>
   </mat-menu>
 </ng-template>
+
+
+<ng-template #logout_button>
+  <a mat-list-item (click)="logout()">Logout</a>
+</ng-template>
+
+
+
+
 
 <mat-sidenav-container class="sidenav-container">
 
@@ -53,10 +69,6 @@
         </mat-nav-list>
     </mat-toolbar>
 
-    
-    <div *ngIf="(user$ | async)[0] == null">
-      Not Logged
-    </div>
     <router-outlet></router-outlet>
 
     <mat-toolbar color="primary" class="footer">

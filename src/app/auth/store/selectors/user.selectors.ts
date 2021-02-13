@@ -5,5 +5,5 @@ export const selectUserState = createFeatureSelector<fromUser.UserState>(
   fromUser.userFeatureKey
 );
 
-export const selectUsers = createSelector( selectUserState, fromUser.selectFeature);
+export const selectMessage = createSelector( selectUserState, fromUser.selectMessage);
 export const selectUser = createSelector( selectUserState, fromUser.selectAll);
