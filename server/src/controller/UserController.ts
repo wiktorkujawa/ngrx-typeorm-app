@@ -77,4 +77,17 @@ export class UserController {
       return Promise.all([{message:'Logout success'}]);
     }
 
+    // Google authentication
+    async googleAuth(request: Request, response: Response, next: NextFunction){
+      return passport.authenticate('google', { scope: ['profile','email'] })(request, response, next)
+    }
+
+    async googleCallback(request: Request, response: Response, next: NextFunction){
+      return passport.authenticate('google', {
+        successRedirect: '/',
+        failureRedirect: '/auth/google',
+      })(request, response, next)
+    }
+
+
 }

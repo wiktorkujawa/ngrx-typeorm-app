@@ -23,6 +23,14 @@ export class AuthService {
     });
   }
 
+  googleLogin():Observable<User[]>{
+    return this.http.get<User[]>(`${environment.apiUrl}/auth/google`,{
+      observe:'body',
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    });
+  }
+
   getUser():Observable<User[]>{
     return this.http.get<User[]>(`${environment.apiUrl}/user`,{
       observe:'body',
