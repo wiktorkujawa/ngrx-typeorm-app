@@ -3,15 +3,15 @@ const GoogleStrategy = passportGoogle.Strategy;
 import {getRepository} from "typeorm";
 import {User} from "../entity/User";
 
-const clientID: string = (process.env.GOOGLE_CLIENT_ID as string);
-const clientSecret: string = (process.env.GOOGLE_CLIENT_SECRET as string);
+
 
 module.exports = (passport: any) => {  
+  
   passport.use(
       new GoogleStrategy(
         {
-          clientID: clientID,
-          clientSecret: clientSecret,
+          clientID: process.env.GOOGLE_CLIENT_ID as string,
+          clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
           callbackURL: '/auth/google/callback',
           proxy: true
         },
@@ -30,7 +30,7 @@ module.exports = (passport: any) => {
             if (user) {
               done(null, user)
             } else {
-              user = await getRepository(User).create(newUser)
+              user = await getRepository(User).save(newUser)
               done(null, user)
             }
           } catch (err) {
@@ -39,12 +39,14 @@ module.exports = (passport: any) => {
         }
       )
     )
+
     passport.serializeUser( function (user: any, done: any) {
-      done(null, user.email);
+      done(null, user);
     });
     
-    passport.deserializeUser( (email: any, done: any) => {
-      getRepository(User).findOne({email:email})
+    passport.deserializeUser( async (email: any, done: any) => {
+      
+      getRepository(User).findOne({email: email})
       .then( ( user: any) => {
         done(null, user);
       })
@@ -52,4 +54,5 @@ module.exports = (passport: any) => {
         done(error,false);
       });
     });
+    
 }

@@ -12,8 +12,6 @@ import passport from 'passport';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
 
-const secret: string = (process.env.sessionSecret as string);
-
 createConnection({
   type: "mongodb",
   url: process.env.mongoURI,
@@ -62,7 +60,7 @@ createConnection({
     // Express session
     app.use(
       session({
-        secret: secret,
+        secret: process.env.sessionSecret as string,
         resave: true,
         saveUninitialized: true
       })

@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { Observable } from 'rxjs';
 import { selectMessage } from 'src/app/auth/store/selectors/user.selectors';
-
+import { environment } from 'src/environments/environment';
 interface FormData {
   switched: boolean,
   data: any
@@ -28,6 +28,7 @@ export class FormComponent implements OnInit {
     password2:''
 };
 
+  environment = environment.apiUrl
   message$!: Observable<any>;
 
   switched!: boolean; 
@@ -121,7 +122,6 @@ export class FormComponent implements OnInit {
         password2: this.exampleData.password2
       }});
     this.message$ = this.store.pipe(select(selectMessage));
-    this.message$.subscribe( data => console.log(data));
   }
 
   onNoClick() {

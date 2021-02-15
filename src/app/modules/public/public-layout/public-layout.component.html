@@ -1,7 +1,6 @@
 <ng-template #menu>
   <a mat-list-item routerLink="/">Home</a>
   <a mat-list-item routerLink="/posts">Posts</a>
-
   <div *ngIf="(user$ | async)[0] == null;then login_button else logout_button" ></div>    
 
   
