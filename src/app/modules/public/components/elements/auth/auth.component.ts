@@ -17,7 +17,7 @@ interface FormData {
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class FormComponent implements OnInit {
+export class AuthComponent implements OnInit {
 
   @Output() FormSubmit: EventEmitter<FormData> = new EventEmitter();
   form = new FormGroup({});

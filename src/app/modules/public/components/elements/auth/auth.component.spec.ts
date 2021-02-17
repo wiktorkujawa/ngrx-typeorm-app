@@ -1,18 +1,32 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BrowserModule } from '@angular/platform-browser';
+import { StoreModule } from '@ngrx/store';
+import * as fromAuth from 'src/app/auth/store/reducers/user.reducer';
 
-import { FormComponent } from './auth.component';
+import { AuthComponent } from './auth.component';
 
-describe('FormComponent', () => {
-  let component: FormComponent;
-  let fixture: ComponentFixture<FormComponent>;
+describe('AuthComponent', () => {
+  let component: AuthComponent;
+  let fixture: ComponentFixture<AuthComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-      imports: [ MatDialogModule ],
-      declarations: [ FormComponent ],
+      imports: [ 
+        MatDialogModule,
+        StoreModule.forFeature(
+          fromAuth.userFeatureKey,
+          fromAuth.reducer
+        ),
+        StoreModule.forRoot({}),
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule 
+      ],
+      declarations: [ AuthComponent ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} }
@@ -22,7 +36,7 @@ describe('FormComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormComponent);
+    fixture = TestBed.createComponent(AuthComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
