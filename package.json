@@ -42,6 +42,7 @@
     "flatted": "^3.1.1",
     "moment": "^2.29.1",
     "mongodb": "^3.6.4",
+    "nodemailer": "^6.4.18",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",

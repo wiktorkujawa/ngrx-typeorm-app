@@ -23,4 +23,13 @@ export class User {
 
     @Column()
     lastName: string;
+
+    @Column({default: false})
+    active: boolean;
+
+    @Column()
+    activeToken: string;
+
+    @Column()
+    activeExpires: Date;
 }

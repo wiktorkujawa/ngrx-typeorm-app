@@ -2,7 +2,7 @@ import passportLocal from 'passport-local';
 const LocalStrategy = passportLocal.Strategy;
 import {getRepository} from "typeorm";
 import bcrypt from 'bcryptjs';
-import {User} from "../entity/User";
+import {User} from "../../entity/User";
 
 
 module.exports =
