@@ -14,8 +14,8 @@ interface FormData {
 @Component({
   selector: 'app-form',
   encapsulation: ViewEncapsulation.None,
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.scss']
 })
 export class FormComponent implements OnInit {
 
