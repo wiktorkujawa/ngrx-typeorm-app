@@ -1,7 +1,7 @@
 import passportGoogle from 'passport-google-oauth20';
 const GoogleStrategy = passportGoogle.Strategy;
 import {getRepository} from "typeorm";
-import {User} from "../entity/User";
+import {User} from "../../entity/User";
 
 
 

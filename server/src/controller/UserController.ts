@@ -3,11 +3,17 @@ import {NextFunction, Request, Response} from "express";
 import {User} from "../entity/User";
 import passport from 'passport';
 import bcrypt from 'bcryptjs';
-require('../passport/local')(passport);
-require('../passport/google')(passport);
+require('../modules/passport/local')(passport);
+require('../modules/passport/google')(passport);
+// import GMailService from '../modules/nodemailer/mailer'; 
+import { GMailService } from '../modules/nodemailer/mailer';
 
 export class UserController {
 
+
+  constructor(
+    // private gmailService: GMailService
+  ){}
     private userRepository = getRepository(User);
 
     async login(request: Request, response: Response, next: NextFunction) {
@@ -19,6 +25,9 @@ export class UserController {
         if (!user) { 
           return response.status(501).json([info]); 
         }
+
+        let gmailService = new GMailService();;
+        gmailService.sendMail('some_account@mail.com','check','check');
 
         request.logIn(user, function(err) {
         if (err) { 
