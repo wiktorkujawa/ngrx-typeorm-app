@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-item-list',
@@ -12,7 +11,6 @@ export class ItemListComponent implements OnInit {
   @Output() deletePost: EventEmitter<string> = new EventEmitter();
 
   constructor( private router: Router,
-    private store: Store,
     private route: ActivatedRoute ) { }
 
   ngOnInit(): void {

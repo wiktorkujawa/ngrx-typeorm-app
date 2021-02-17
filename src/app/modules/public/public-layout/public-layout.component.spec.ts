@@ -11,6 +11,8 @@ import { PublicLayoutComponent } from './public-layout.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
+import * as fromAuth from '../../../auth/store/reducers/user.reducer';
 
 describe('PublicLayoutComponent', () => {
   let component: PublicLayoutComponent;
@@ -29,6 +31,9 @@ describe('PublicLayoutComponent', () => {
         MatListModule,
         MatSidenavModule,
         MatToolbarModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature( fromAuth.userFeatureKey,
+          fromAuth.reducer)
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();

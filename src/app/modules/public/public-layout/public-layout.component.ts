@@ -4,8 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { FormComponent } from '../components/elements/auth/auth.component';
-import { User } from 'src/app/auth/models/user';
+import { AuthComponent } from '../components/elements/auth/auth.component';
 import { select, Store } from '@ngrx/store';
 import { UserState } from 'src/app/auth/store/reducers/user.reducer';
 import { loadUser, login, logout, register } from 'src/app/auth/store/actions/user.actions';
@@ -34,7 +33,7 @@ export class PublicLayoutComponent implements OnInit {
   }
 
   AuthDialog( form: boolean){
-    const ref = this.dialog.open( FormComponent, { 
+    const ref = this.dialog.open( AuthComponent, { 
       panelClass: 'my-dialog',
       closeOnNavigation: true,
       data: {
