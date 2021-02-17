@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { FormComponent } from '../components/elements/form/form.component';
+import { FormComponent } from '../components/elements/auth/auth.component';
 import { User } from 'src/app/auth/models/user';
 import { select, Store } from '@ngrx/store';
 import { UserState } from 'src/app/auth/store/reducers/user.reducer';

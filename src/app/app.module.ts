@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PublicLayoutComponent } from './modules/public/public-layout/public-layout.component';
 import { AdminLayoutComponent } from './modules/admin/admin-layout/admin-layout.component';
 import { MaterialModule } from './modules/shared/material/material.module';
-import { FormComponent } from './modules/public/components/elements/form/form.component';
+import { FormComponent } from './modules/public/components/elements/auth/auth.component';
 import { DateTimePickerField } from './modules/shared/material/custom-formly/date-time-picker/date-time-picker.component';
 import { FormlyModule } from '@ngx-formly/core';
 import { HomeComponent } from './modules/public/components/pages/home/home.component';

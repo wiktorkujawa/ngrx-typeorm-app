@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { FormComponent } from './form.component';
+import { FormComponent } from './auth.component';
 
 describe('FormComponent', () => {
   let component: FormComponent;
