@@ -6,7 +6,6 @@ import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 require('../modules/passport/local')(passport);
 require('../modules/passport/google')(passport);
-// import GMailService from '../modules/nodemailer/mailer'; 
 import { GMailService } from '../modules/nodemailer/mailer';
 
 export class UserController {
