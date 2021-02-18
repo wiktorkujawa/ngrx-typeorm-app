@@ -42,14 +42,13 @@ export class UserController {
       if(user.activeExpires < Date.now()){
         return response.status(501).json({message:'Activation link expired'});
       }
-      // console.log('get problem');
 
       this.userRepository.save({
         ...user,
         active:true
       })
       .then(() => {
-        return response.status(200).redirect('http://localhost:4200');
+        return response.status(200).redirect('/');
         // json({message:'User account activated'})
       })
       .catch((error) => {
