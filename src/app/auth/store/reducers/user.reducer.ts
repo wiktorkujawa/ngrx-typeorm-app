@@ -47,7 +47,14 @@ export const reducer = createReducer(
     }
   }),
 
-  on(UserActions.logoutSuccess, (state, action) => adapter.removeAll(action.data[0])),
+  on(UserActions.logoutSuccess, (state:any, action) => {
+    return { ...state,
+    entities: {
+      user:null
+    },
+    message: action.success
+  }
+  }),
   on(UserActions.logoutFailure, (state, {error}) => {
     return { ...state,
       error

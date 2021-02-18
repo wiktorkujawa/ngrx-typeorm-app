@@ -31,5 +31,5 @@ export class User {
     activeToken: string;
 
     @Column()
-    activeExpires: Date;
+    activeExpires: number;
 }
