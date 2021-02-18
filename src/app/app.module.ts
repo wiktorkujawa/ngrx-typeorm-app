@@ -19,6 +19,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import * as fromUser from './auth/store/reducers/user.reducer';
 import { UserEffects } from './auth/store/effects/user.effects';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { UserEffects } from './auth/store/effects/user.effects';
     FormlyModule.forRoot({ extras: { lazyRender: true }, types: [
       { name: 'datetimepicker', component: DateTimePickerField },
     ] }),
+    MatDialogModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot({}, {}),
     HttpClientModule,

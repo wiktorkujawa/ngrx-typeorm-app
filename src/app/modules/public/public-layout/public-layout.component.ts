@@ -45,6 +45,11 @@ export class PublicLayoutComponent implements OnInit {
       success.switched ?
       this.store.dispatch(login({data: success.data}))
       : this.store.dispatch(register({data: success.data}))
+      this.user$.subscribe(data => {
+        if(data[0]!==null)
+        ref.close();
+      });
+      
 
     });
     ref.afterClosed().subscribe(() => {
