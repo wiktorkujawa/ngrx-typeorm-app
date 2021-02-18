@@ -3,6 +3,7 @@ import {NextFunction, Request, Response} from "express";
 import {User} from "../entity/User";
 import passport from 'passport';
 import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
 require('../modules/passport/local')(passport);
 require('../modules/passport/google')(passport);
 // import GMailService from '../modules/nodemailer/mailer'; 
@@ -10,10 +11,6 @@ import { GMailService } from '../modules/nodemailer/mailer';
 
 export class UserController {
 
-
-  constructor(
-    // private gmailService: GMailService
-  ){}
     private userRepository = getRepository(User);
 
     async login(request: Request, response: Response, next: NextFunction) {
@@ -25,21 +22,39 @@ export class UserController {
         if (!user) { 
           return response.status(501).json([info]); 
         }
-
-        let gmailService = new GMailService();;
-        gmailService.sendMail('some_account@mail.com','check','check');
-
+        if(!user.active){
+          return response.status(501).json([{message:'Account not activated. Check your email'}]);
+        }
         request.logIn(user, function(err) {
         if (err) { 
           return response.status(501).json(err); 
         }
-
         return Promise.all([user])
         .then( data => response.status(200).json(data))
         .catch( error => response.status(403).json([error]));
       });
-      
       })(request, response, next);
+    }
+
+    async activateAccount(request:Request, response: Response, _next: NextFunction) {
+      let user: any = await this.userRepository.findOne({activeToken: request.params.activeToken});
+
+      if(user.activeExpires < Date.now()){
+        return response.status(501).json({message:'Activation link expired'});
+      }
+      // console.log('get problem');
+
+      this.userRepository.save({
+        ...user,
+        active:true
+      })
+      .then(() => {
+        return response.status(200).redirect('http://localhost:4200');
+        // json({message:'User account activated'})
+      })
+      .catch((error) => {
+        return response.status(200).json(error);
+       });
     }
 
     async register(request: Request, response: Response, _next: NextFunction) {
@@ -66,16 +81,37 @@ export class UserController {
     
             return response.status(409).json(errors);
           } else {
-            this.userRepository.save({
-                email: email,
-                displayName: displayName,
-                password: bcrypt.hashSync(password,10)
-              });
-              return response.status(201).json({message: 'Registration success'});
-            }
-          })
-        }
-    }
+            
+                crypto.randomBytes(20,  (err, buf) => {
+            
+                  if(err){
+                    console.log(err);
+                  }
+                  const activeToken = Date.now()+buf.toString('hex');
+                  this.userRepository.save({
+                    email: email,
+                    displayName: displayName,
+                    password: bcrypt.hashSync(password,10),
+                    active: false,
+                    activeToken: activeToken,
+                    activeExpires: Date.now() + 24 * 3600 * 1000
+                  });
+
+                  let gmailService = new GMailService();;
+                  gmailService.sendMail(
+                    email,
+                    `Account Activation - ${process.env.PAGE_NAME}`,
+                    `<p>Hello ${displayName},</p>
+                    <p>Click the activation link, if you registered on ${process.env.PAGE_NAME} </p>
+                    <a href='${process.env.PAGE_NAME}/account/active/${activeToken}'>${process.env.PAGE_NAME}/account/active/${activeToken}</a>
+                    <p>Otherwise ignore it, link will expire after 24 hours.</p>`
+                  );
+    
+              return response.status(201).json({message: 'Registration success. Check your email to activate account.'});
+            })
+          }
+        })
+    }}
 
     async getUser(request: Request, _response: Response, _next: NextFunction) {
         return Promise.all([request.user])

@@ -11,7 +11,13 @@ export const userRoute = [{
     route: "/register",
     controller: UserController,
     action: "register"
-  }, 
+  },
+  {
+    method: "get",
+    route: "/account/active/:activeToken",
+    controller: UserController,
+    action: "activateAccount"
+  },  
   {
     method: "get",
     route: "/user",

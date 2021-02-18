@@ -55,7 +55,7 @@ export const logout = createAction(
 
 export const logoutSuccess = createAction(
   'LOGOUT_SUCCESS',
-  props<{ data: any }>()
+  props<{ success: any }>()
 );
 
 export const logoutFailure = createAction(

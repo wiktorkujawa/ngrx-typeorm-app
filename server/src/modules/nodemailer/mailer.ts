@@ -12,7 +12,7 @@ import * as nodemailer from 'nodemailer';
           from: process.env.SUPPORT_EMAIL, 
           to: to, 
           subject: subject, 
-          text: content 
+          html: content 
         } 
  
         this._transporter.sendMail(  

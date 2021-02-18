@@ -43,7 +43,7 @@ export class UserEffects {
       switchMap(() =>
         this.authService.logout()
         .pipe(
-          map(data=> UserActions.logoutSuccess({ data })),
+          map( success => UserActions.logoutSuccess({ success })),
           catchError(error => of(UserActions.loadUserFailure({ error }))))
       )
     );
