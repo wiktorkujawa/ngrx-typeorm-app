@@ -8,7 +8,7 @@ import { AuthComponent } from '../components/elements/auth/auth.component';
 import { select, Store } from '@ngrx/store';
 import { UserState } from 'src/app/auth/store/reducers/user.reducer';
 import { loadUser, login, logout, register } from 'src/app/auth/store/actions/user.actions';
-import { selectUser } from 'src/app/auth/store/selectors/user.selectors';
+import { selectMessage, selectUser } from 'src/app/auth/store/selectors/user.selectors';
 
 @Component({
   selector: 'app-public-layout',
@@ -18,7 +18,7 @@ import { selectUser } from 'src/app/auth/store/selectors/user.selectors';
 export class PublicLayoutComponent implements OnInit {
 
   user$!: Observable<any>;
-
+  message$!: Observable<any>;
   isMobile$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.XSmall)
     .pipe(
@@ -60,6 +60,8 @@ export class PublicLayoutComponent implements OnInit {
 
   logout() {
     this.store.dispatch(logout());
+    this.message$ = this.store.pipe(select(selectMessage));
+    this.message$.subscribe(data => console.log(data));
   }
 
   constructor(

@@ -72,6 +72,9 @@
         </mat-nav-list>
     </mat-toolbar>
 
+    <h2 class="welcome" *ngIf="(user$ | async)[0]!==null"> Hello {{ (user$ | async)[0]?.displayName }}</h2>
+    <h2 class="welcome" *ngIf="(message$ | async)"> {{ (message$ | async)[0]?.message }}</h2>
+
     <router-outlet></router-outlet>
 
     <mat-toolbar color="primary" class="footer">

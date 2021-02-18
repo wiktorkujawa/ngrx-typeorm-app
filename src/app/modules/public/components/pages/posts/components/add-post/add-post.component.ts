@@ -48,7 +48,6 @@ fields: FormlyFieldConfig[] = [
       subject: this.postData.subject,
       content: this.postData.content
     });  
-    console.log(this.postData);
   }
 
   onNoClick() {
