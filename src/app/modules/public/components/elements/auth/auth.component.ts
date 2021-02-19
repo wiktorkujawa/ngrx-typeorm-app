@@ -61,10 +61,17 @@ export class AuthComponent implements OnInit {
       key: 'email',
       type: 'input',
       templateOptions: {
+        type: 'email',
         label: 'Email address',
         placeholder: 'Enter email',
         required: true,
         appearance: 'outline'
+      },
+      validators: {
+        email: {
+          expression: (c: any) => !c.value ||  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(c.value),
+          message: (_error:any, field: any) => `"${field.formControl.value}" is not a valid email Address`,
+        }
       }
     },
     {
@@ -98,7 +105,7 @@ export class AuthComponent implements OnInit {
         required: true,
         appearance: 'outline'
       }
-    }
+    },
   ];
 
   constructor(
