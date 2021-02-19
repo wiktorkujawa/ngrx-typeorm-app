@@ -41,7 +41,7 @@ export class PublicLayoutComponent implements OnInit {
       }
     });
 
-    const sub = ref.componentInstance.FormSubmit.subscribe(( success: any) => {
+    const sub = ref.componentInstance.RegisterOrLogin.subscribe(( success: any) => {
       success.switched ?
       this.store.dispatch(login({data: success.data}))
       : this.store.dispatch(register({data: success.data}))

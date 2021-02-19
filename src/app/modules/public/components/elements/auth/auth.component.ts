@@ -19,7 +19,7 @@ interface FormData {
 })
 export class AuthComponent implements OnInit {
 
-  @Output() FormSubmit: EventEmitter<FormData> = new EventEmitter();
+  @Output() RegisterOrLogin: EventEmitter<FormData> = new EventEmitter();
   form = new FormGroup({});
   exampleData = { 
     email:'',
@@ -120,7 +120,7 @@ export class AuthComponent implements OnInit {
   
 
   onSubmit(){
-    this.FormSubmit.emit({
+    this.RegisterOrLogin.emit({
       switched: this.switched, 
       data: {
         email: this.exampleData.email,
