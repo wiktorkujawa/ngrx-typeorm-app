@@ -46,7 +46,6 @@ export class PostController {
     }
 
     async displayImage(request: Request, response: Response, _next: NextFunction) {
-      console.log(request.params.filename);
       gfs.files.findOne({ filename: request.params.filename }, (_err: any, file: any) => {
         // Check if file
         if (!file || file.length === 0) {
@@ -107,7 +106,16 @@ export class PostController {
     async remove(request: Request, response: Response, _next: NextFunction) {
         let postToRemove = await this.postRepository.findOne(request.params.id);
         await this.postRepository.remove(postToRemove!)
-        .then((post) => response.send(`Post ${post.content} removed`))
+        .then((post) => {
+          if(post.files_id){
+            gfs.remove({ _id: post.files_id, root: 'posts' }, (err:any, _gridFSBucket:any) => {
+              if (err) {
+                return response.status(404).json({ err: err });
+              }
+            });
+          }
+          return response.send(`Post ${post.content} removed`);
+        })
         .catch(() => response.send('There is no post to remove'));
     }
 

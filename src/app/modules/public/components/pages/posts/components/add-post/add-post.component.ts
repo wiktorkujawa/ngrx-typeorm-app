@@ -79,10 +79,8 @@ fields: FormlyFieldConfig[] = [
     if( this.postData.fileImage){
       const message = new FormData();
       
-      console.log(this.postData.files[0]);
       message.append('post', this.postData.files[0]);
 
-      console.log(typeof(JSON.stringify(this.postData.fileImage)));
       message.append('content', this.postData.content);
       message.append('email', this.postData.email);
       message.append('fileImage', JSON.stringify(this.postData.fileImage));
