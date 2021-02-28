@@ -61,7 +61,6 @@ export class PublicLayoutComponent implements OnInit {
   logout() {
     this.store.dispatch(logout());
     this.message$ = this.store.pipe(select(selectMessage));
-    this.message$.subscribe(data => console.log(data));
   }
 
   constructor(

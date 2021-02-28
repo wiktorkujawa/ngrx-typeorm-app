@@ -18,7 +18,6 @@ export class ItemListComponent implements OnInit {
     private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
-    console.log(this.todo);
   }
 
 
