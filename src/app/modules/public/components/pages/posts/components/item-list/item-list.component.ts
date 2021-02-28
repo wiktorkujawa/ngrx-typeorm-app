@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-item-list',
@@ -8,12 +9,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ItemListComponent implements OnInit {
   @Input() todo: any;
+  @Input() user: any;
   @Output() deletePost: EventEmitter<string> = new EventEmitter();
+
+  environment = environment.apiUrl;
 
   constructor( private router: Router,
     private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
+    console.log(this.todo);
   }
 
 

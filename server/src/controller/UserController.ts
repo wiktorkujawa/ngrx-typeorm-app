@@ -95,7 +95,7 @@ export class UserController {
                     activeExpires: Date.now() + 24 * 3600 * 1000
                   });
 
-                  let gmailService = new GMailService();;
+                  let gmailService = new GMailService();
                   gmailService.sendMail(
                     email,
                     `Account Activation - ${process.env.PAGE_NAME}`,

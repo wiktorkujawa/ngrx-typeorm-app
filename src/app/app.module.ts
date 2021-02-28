@@ -20,6 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
 import * as fromUser from './auth/store/reducers/user.reducer';
 import { UserEffects } from './auth/store/effects/user.effects';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DropzoneField } from './modules/shared/material/custom-formly/dropzone/dropzone.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -28,11 +30,13 @@ import { MatDialogModule } from '@angular/material/dialog';
     AdminLayoutComponent,
     AuthComponent,
     DateTimePickerField,
+    DropzoneField,
     HomeComponent
   ],
   imports: [
     FormlyModule.forRoot({ extras: { lazyRender: true }, types: [
       { name: 'datetimepicker', component: DateTimePickerField },
+      { name: 'dropzone', component: DropzoneField }
     ] }),
     MatDialogModule,
     EffectsModule.forRoot([]),
@@ -42,6 +46,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgxDropzoneModule,
     ReactiveFormsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreModule.forFeature(fromUser.userFeatureKey, fromUser.reducer),

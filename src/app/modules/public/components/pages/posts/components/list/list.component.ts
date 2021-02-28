@@ -6,6 +6,9 @@ import { select } from '@ngrx/store';
 import { Store } from '@ngrx/store';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { Observable } from 'rxjs';
+import { loadUser, login, register } from 'src/app/auth/store/actions/user.actions';
+import { selectUser } from 'src/app/auth/store/selectors/user.selectors';
+import { AuthComponent } from '../../../../elements/auth/auth.component';
 import { addPost, deletePost, loadPosts } from '../../store/actions/post.actions';
 import { Post } from '../../store/model/post';
 import { PostState } from '../../store/reducers/post.reducer';
@@ -22,6 +25,7 @@ export class ListComponent implements OnInit {
   @ViewChildren('child') child:any;
 
   posts$!: Observable<Post[]>;
+  user$!: Observable<any>;
 
   cols! : number;
   margin!: string;
@@ -109,8 +113,38 @@ export class ListComponent implements OnInit {
     this.store.dispatch(deletePost({id:id}));
   }
 
+  AuthDialog( form: boolean){
+    const ref = this.dialog.open( AuthComponent, { 
+      panelClass: 'my-dialog',
+      closeOnNavigation: true,
+      data: {
+        switched: form
+      }
+    });
+
+    const sub = ref.componentInstance.RegisterOrLogin.subscribe(( success: any) => {
+      success.switched ?
+      this.store.dispatch(login({data: success.data}))
+      : this.store.dispatch(register({data: success.data}))
+      this.user$.subscribe(data => {
+        if(data[0]!==null)
+        ref.close();
+      });
+      
+
+    });
+    ref.afterClosed().subscribe(() => {
+      sub.unsubscribe();
+    });
+  }
+
   ngOnInit(): void {
     this.loadNewPosts();
+    this.getUser();
+  }
+
+  getUser(): void {
+    this.user$ = this.store.pipe(select(selectUser));
   }
 
   loadNewPosts(): void {

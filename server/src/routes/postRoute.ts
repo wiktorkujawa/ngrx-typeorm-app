@@ -5,12 +5,20 @@ export const postRoute = [{
     route: "/posts",
     controller: PostController,
     action: "all"
-}, {
+}, 
+{
     method: "get",
     route: "/posts/:id",
     controller: PostController,
     action: "one"
-}, {
+}, 
+{
+  method: "get",
+  route: "/posts/image/:filename",
+  controller: PostController,
+  action: "displayImage"
+}, 
+{
     method: "post",
     route: "/posts",
     controller: PostController,
