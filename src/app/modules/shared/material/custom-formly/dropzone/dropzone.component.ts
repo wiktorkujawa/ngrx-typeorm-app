@@ -4,12 +4,21 @@ import { FieldType } from '@ngx-formly/core';
 
 @Component({
  selector: 'formly-field-input',
- templateUrl: './date-time-picker.component.html'
+ templateUrl: './dropzone.component.html'
 })
 
-export class DateTimePickerField extends FieldType {
+export class DropzoneField extends FieldType {
 
   public formControl!: FormControl; 
+
+  onSelect(event:any){
+    this.formControl.setValue(event.addedFiles);
+    // console.log(event);
+  }
+
+  onRemove() {
+    this.formControl.setValue([]);
+  }
 
     constructor() {
         super();

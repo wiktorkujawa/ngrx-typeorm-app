@@ -1,8 +1,16 @@
-<mat-grid-tile-header>
-  <button mat-button color="warn" class="delete" (click)="onDelete(todo.id)">X</button>
-  <button mat-button (click)="onSelect()" *ngIf="todo" class="name">{{todo.subject}}</button>
-</mat-grid-tile-header>
-{{todo.content}}
-<mat-grid-tile-footer>
 
-</mat-grid-tile-footer>
+
+<div>
+  <mat-toolbar color="background">
+  <button mat-button color="warn" class="delete" *ngIf="user" (click)="onDelete(todo.id)">X</button>
+  <button mat-button (click)="onSelect()" *ngIf="todo" class="name">{{todo.content}}</button>
+</mat-toolbar>
+</div>
+<div class="position-relative" color="background">
+  <img [src]="todo.fileImage ? environment+'/'+todo.path : todo.path" alt="">
+</div>
+<div>
+  <mat-toolbar class="d-flex justify-content-center" color="background">
+    hello
+  </mat-toolbar>
+</div>

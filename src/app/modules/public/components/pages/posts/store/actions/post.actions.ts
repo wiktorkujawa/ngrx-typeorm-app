@@ -20,7 +20,7 @@ export const loadPostsFailure = createAction(
 // add posts
 export const addPost = createAction(
   'ADD_POST',
-  props<{ post: addPostModel }>()
+  props<{ post: any }>()
 );
 
 export const addPostSuccess = createAction(

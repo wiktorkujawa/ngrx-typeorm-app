@@ -28,11 +28,14 @@ export class PostEffects {
     return this.actions$.pipe( 
 
       ofType(PostActions.addPost),
-      concatMap((action) =>
-        this.postService.createPost(action.post)
+      concatMap((action) => {
+        console.log("ACTION");
+        console.log(action.post);
+        console.log("ACTION");
+        return this.postService.createPost(action.post)
         .pipe(
           map(post => PostActions.addPostSuccess({ post })),
-          catchError(error => of(PostActions.loadPostsFailure({ error }))))
+          catchError(error => of(PostActions.loadPostsFailure({ error }))))}
       )
     );
   });

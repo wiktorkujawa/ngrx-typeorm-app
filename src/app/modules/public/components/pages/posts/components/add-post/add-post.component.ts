@@ -1,7 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { select, Store } from '@ngrx/store';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { Observable } from 'rxjs';
+import { loadUser } from 'src/app/auth/store/actions/user.actions';
+import { UserState } from 'src/app/auth/store/reducers/user.reducer';
+import { selectUser } from 'src/app/auth/store/selectors/user.selectors';
 import { addPostModel } from '../../store/model/post';
 
 @Component({
@@ -11,52 +16,101 @@ import { addPostModel } from '../../store/model/post';
 })
 export class AddPostComponent implements OnInit {
 
-  @Output() addPost: EventEmitter<addPostModel> = new EventEmitter();
+
+  user$!: Observable<any>;
+
+
+  @Output() addPost: EventEmitter<any> = new EventEmitter();
 
   postData: addPostModel = {
-    subject:'',
-    content:''
+    content:'',
+    files_id:'',
+    fileImage: false,
+    email: '',
+    files: [],
+    path:''
   };
 
 
   form = new FormGroup({});
 fields: FormlyFieldConfig[] = [
+  {
+    key: 'content',
+    type: 'input',
+    templateOptions: {
+      label: 'Post content',
+      placeholder: 'Enter content',
+      required: true,
+      appearance: 'outline'
+    }
+  },
     {
-      key: 'subject',
-      type: 'input',
+      key: 'fileImage',
+      type: 'checkbox',
       templateOptions: {
-        label: 'Post title',
-        placeholder: 'Enter title',
+        label: 'File Image:',
         required: true,
-        appearance: 'outline'
       }
     },
     {
-      key: 'content',
+      key: 'files',
+      type: 'dropzone',
+      templateOptions: {
+        label: 'File Image:',
+        required: true,
+      },
+      hideExpression: '!model.fileImage',
+    },
+    {
+      key: 'path',
       type: 'input',
       templateOptions: {
-        label: 'Post content',
-        placeholder: 'Enter content',
+        label: 'Image URL:',
         required: true,
         appearance: 'outline'
-      }
+      },
+      hideExpression: 'model.fileImage',
     }
   ];
 
+  
   onSubmit() {
-    this.addPost.emit({
-      subject: this.postData.subject,
-      content: this.postData.content
-    });  
+
+    if( this.postData.fileImage){
+      const message = new FormData();
+      
+      console.log(this.postData.files[0]);
+      message.append('post', this.postData.files[0]);
+
+      console.log(typeof(JSON.stringify(this.postData.fileImage)));
+      message.append('content', this.postData.content);
+      message.append('email', this.postData.email);
+      message.append('fileImage', JSON.stringify(this.postData.fileImage));
+      this.addPost.emit(message);
+    }
+    else{
+      this.addPost.emit(this.postData);
+    }
   }
 
   onNoClick() {
     this.dialog.closeAll();
   };
 
-  constructor( public dialog: MatDialog) { }
+  constructor( public dialog: MatDialog,
+    private store: Store<UserState>) { }
 
   ngOnInit(): void {
+    this.store.dispatch(loadUser());
+    this.user$ = this.store.pipe(select(selectUser));
+    this.user$.subscribe( user => {
+      if(user[0]!=null){
+        this.postData.email = user[0].email
+        this.postData.path = user[0].image
+      }
+    
+    });
+
   }
 
 }

@@ -7,9 +7,24 @@ export class Post {
     id: ObjectID;
 
     @Column()
-    subject: string;
-
-    @Column()
     content: string;
 
+    @Column()
+    path: string;
+
+    @Column()
+    email: string;
+    
+    @Column()
+    fileImage: boolean;
+    
+    @Column() 
+    files_id: string;
+
+    @Column()
+    created_at: number;
+
+    @Column()
+    modified_at: number;
+    
 }

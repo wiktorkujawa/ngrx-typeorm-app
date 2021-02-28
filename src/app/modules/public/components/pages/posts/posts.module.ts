@@ -15,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { DateTimePickerField } from 'src/app/modules/shared/material/custom-formly/date-time-picker/date-time-picker.component';
 import { AddPostComponent } from './components/add-post/add-post.component';
+import { DropzoneField } from 'src/app/modules/shared/material/custom-formly/dropzone/dropzone.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
 @NgModule({
@@ -25,11 +27,13 @@ import { AddPostComponent } from './components/add-post/add-post.component';
     PostsRoutingModule,
     FormlyModule.forChild({ extras: { lazyRender: true }, types: [
       { name: 'datetimepicker', component: DateTimePickerField },
+      { name: 'dropzone', component: DropzoneField }
     ] }),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MaterialModule,
+    NgxDropzoneModule,
     StoreModule.forFeature(fromPost.postFeatureKey, fromPost.reducer),
     EffectsModule.forFeature([PostEffects])
   ]

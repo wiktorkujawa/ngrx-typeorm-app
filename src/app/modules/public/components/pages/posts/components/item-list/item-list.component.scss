@@ -12,3 +12,11 @@
   position: absolute;
   right: 0;
 }
+
+img {
+  position: absolute; 
+  height: 100%; 
+  top: 0;
+  left: 50%;
+  transform: translate(-50%,0);
+}

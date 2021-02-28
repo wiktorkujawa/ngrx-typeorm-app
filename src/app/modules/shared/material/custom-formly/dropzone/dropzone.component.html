@@ -1,0 +1,7 @@
+
+<ngx-dropzone class='ngx-dropzone' (change)="onSelect($event)">
+  <ngx-dropzone-label>Drop it here!</ngx-dropzone-label>
+  <ngx-dropzone-image-preview *ngFor="let f of formControl.value" class="ngx-dropzone-preview" ngProjectAs="ngx-dropzone-preview" [removable]="true" (removed)="onRemove()" [file]="f">
+      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+  </ngx-dropzone-image-preview>
+</ngx-dropzone>

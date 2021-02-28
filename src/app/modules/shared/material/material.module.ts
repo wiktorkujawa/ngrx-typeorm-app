@@ -23,6 +23,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 // Formly modules
 import { FormlyMatDatepickerModule } from '@ngx-formly/material/datepicker';
 import { FormlyMaterialModule } from '@ngx-formly/material';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 const MaterialComponents = [
   MatSnackBarModule,
@@ -45,12 +46,12 @@ const MaterialComponents = [
   MatFormFieldModule,
   MatDatepickerModule,
   FormlyMatDatepickerModule,
-  FormlyMaterialModule
+  FormlyMaterialModule,
+  NgxDropzoneModule
 ];
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  declarations: [],
   imports: [MaterialComponents],
   exports: [MaterialComponents],
 })
