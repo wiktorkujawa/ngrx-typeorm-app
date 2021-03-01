@@ -9,11 +9,12 @@ import { Observable } from 'rxjs';
 import { loadUser, login, register } from 'src/app/auth/store/actions/user.actions';
 import { selectUser } from 'src/app/auth/store/selectors/user.selectors';
 import { AuthComponent } from '../../../../elements/auth/auth.component';
-import { addPost, deletePost, loadPosts } from '../../store/actions/post.actions';
+import { addPost, deletePost, loadPosts, updatePost } from '../../store/actions/post.actions';
 import { Post } from '../../store/model/post';
 import { PostState } from '../../store/reducers/post.reducer';
 import { selectPosts } from '../../store/selectors/post.selectors';
 import { AddPostComponent } from '../add-post/add-post.component';
+import { UpdatePostComponent } from '../update-post/update-post.component';
 
 @Component({
   selector: 'app-list',
@@ -40,11 +41,11 @@ export class ListComponent implements OnInit {
       xs: 1
     },
     margin:{
-      xl: "2rem",
-      lg: "1.7rem",
-      md: "1.4rem",
-      sm: "1.1rem",
-      xs: "0.8rem"
+      xl: "3rem",
+      lg: "2.5rem",
+      md: "2rem",
+      sm: "1.5rem",
+      xs: "1rem"
     },
     gutter:{
       xl: "50px",
@@ -105,6 +106,23 @@ export class ListComponent implements OnInit {
       this.store.dispatch(addPost({ post: post}))
     });
       ref.afterClosed().subscribe(() => {
+      sub.unsubscribe();
+    });
+  };
+
+  updateModal(model:any){
+    let { id, ...post} =model;
+    const ref = this.dialog.open(UpdatePostComponent, { width: '60vw',
+    minWidth:"350px",
+    panelClass: 'my-dialog', data: {
+      post: post,
+      user: this.user$.subscribe(data => data)
+    }});
+    const sub = ref.componentInstance.updatePost.subscribe((newPost: any) => {
+      console.log(newPost)
+      this.store.dispatch(updatePost({ id: id, changes: newPost}));
+    });
+    ref.afterClosed().subscribe(() => {
       sub.unsubscribe();
     });
   }

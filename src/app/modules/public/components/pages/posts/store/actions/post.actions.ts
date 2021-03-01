@@ -1,3 +1,4 @@
+import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 import { Post, addPostModel } from '../model/post';
 
@@ -30,6 +31,22 @@ export const addPostSuccess = createAction(
 
 export const addPostFailure = createAction(
   'ADD_POST_FAILURE',
+  props<{ error: any }>()
+);
+
+// update posts
+export const updatePost = createAction(
+  'UPDATE_POST',
+  props<{ id: string, changes: any }>()
+);
+
+export const updatePostSuccess = createAction(
+  'UPDATE_POST_SUCCESS',
+  props<{ id: string, post: any }>()
+);
+
+export const updatePostFailure = createAction(
+  'UPDATE_POST_FAILURE',
   props<{ error: any }>()
 );
 

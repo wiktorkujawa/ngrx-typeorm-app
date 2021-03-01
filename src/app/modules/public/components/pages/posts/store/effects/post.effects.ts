@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, concatMap } from 'rxjs/operators';
+import { catchError, map, concatMap, switchMap } from 'rxjs/operators';
 import { EMPTY, of } from 'rxjs';
 
 import * as PostActions from '../actions/post.actions';
@@ -31,7 +31,22 @@ export class PostEffects {
       concatMap((action) => this.postService.createPost(action.post)
         .pipe(
           map(post => PostActions.addPostSuccess({ post })),
-          catchError(error => of(PostActions.loadPostsFailure({ error }))))
+          catchError(error => of(PostActions.addPostFailure({ error }))))
+      )
+    );
+  });
+
+  updatePost$ = createEffect(():any => {
+    return this.actions$.pipe( 
+
+      ofType(PostActions.updatePost),
+      concatMap((action) => this.postService.updatePost(action.id, action.changes)
+        .pipe(
+          map((post:any) => {
+            const {id, ...newPost} = post; 
+            return PostActions.updatePostSuccess({ id:post.id, post: newPost }); 
+          }),
+          catchError(error => of(PostActions.updatePostFailure({ error }))))
       )
     );
   });

@@ -19,6 +19,10 @@ export class PostService {
     return this.http.post<Post>(`${environment.apiUrl}/posts`, model);
   }
 
+  updatePost(id: string,model: any){
+    return this.http.put(`${environment.apiUrl}/posts/update/${id}`, model);
+  }
+
   removePost(id: string) {
     return this.http.delete(`${environment.apiUrl}/posts/${id}`, {responseType: 'text'});
   }

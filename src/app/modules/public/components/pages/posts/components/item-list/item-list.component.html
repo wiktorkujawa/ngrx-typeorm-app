@@ -11,6 +11,6 @@
 </div>
 <div>
   <mat-toolbar class="d-flex justify-content-center" color="background">
-    hello
+    <button mat-button (click)="openUpdate(todo)" *ngIf="todo" >Update item</button>
   </mat-toolbar>
 </div>
