@@ -54,6 +54,7 @@ $hover-color: #FF4136;
 }
 
 mat-sidenav-content {
+  overflow-x: hidden;
   box-sizing: border-box;
   position: relative;
   min-height: 100vh;

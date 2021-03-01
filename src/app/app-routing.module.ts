@@ -12,6 +12,7 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent,
+        data: {animation: 'One'}
       },
       {
         path: 'posts',
@@ -19,6 +20,7 @@ const routes: Routes = [
           import('./modules/public/components/pages/posts/posts.module').then(
             (m) => m.PostsModule
           ),
+          data: {animation: 'Two'}
       },
     ],
   },

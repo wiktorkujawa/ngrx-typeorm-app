@@ -45,7 +45,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar color="primary" class="mb-4">
+    <mat-toolbar color="primary">
       <div>
         <button
           type="button"
@@ -72,10 +72,14 @@
         </mat-nav-list>
     </mat-toolbar>
 
+    <mat-toolbar class="d-flex justify-content-end">
     <h2 class="welcome" *ngIf="(user$ | async)[0]!==null"> Hello {{ (user$ | async)[0]?.displayName }}</h2>
     <h2 class="welcome" *ngIf="(message$ | async)"> {{ (message$ | async)[0]?.message }}</h2>
+  </mat-toolbar>
 
-    <router-outlet></router-outlet>
+  <div class="mt-5" [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #logoScroll #outlet="outlet"></router-outlet>
+  </div>
 
     <mat-toolbar color="primary" class="footer">
       <span>Example app</span>

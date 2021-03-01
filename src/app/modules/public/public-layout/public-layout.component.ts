@@ -9,11 +9,16 @@ import { select, Store } from '@ngrx/store';
 import { UserState } from 'src/app/auth/store/reducers/user.reducer';
 import { loadUser, login, logout, register } from 'src/app/auth/store/actions/user.actions';
 import { selectMessage, selectUser } from 'src/app/auth/store/selectors/user.selectors';
+import { slideInAnimation } from '../animations';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-public-layout',
   templateUrl: './public-layout.component.html',
   styleUrls: ['./public-layout.component.scss'],
+  animations: [
+    slideInAnimation
+  ]
 })
 export class PublicLayoutComponent implements OnInit {
 
@@ -30,6 +35,10 @@ export class PublicLayoutComponent implements OnInit {
     checked
       ? this.document.body.classList.add('alternate-theme')
       : this.document.body.classList.remove('alternate-theme');
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 
   AuthDialog( form: boolean){

@@ -5,7 +5,7 @@
 <hr>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <formly-form [form]="form" [fields]="fields" [model]="postData"></formly-form>
-    <button class="button" mat-raised-button type="submit" color="primary" [disabled]="!form.valid">Submit </button>
+    <button class="mt-5" mat-raised-button type="submit" color="primary" [disabled]="!form.valid">Submit </button>
   </form>
   
 </mat-dialog-content>

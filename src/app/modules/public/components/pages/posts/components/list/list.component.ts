@@ -112,11 +112,13 @@ export class ListComponent implements OnInit {
 
   updateModal(model:any){
     let { id, ...post} =model;
+    let user;
+    this.user$.subscribe(data => user = data[0])
     const ref = this.dialog.open(UpdatePostComponent, { width: '60vw',
     minWidth:"350px",
     panelClass: 'my-dialog', data: {
       post: post,
-      user: this.user$.subscribe(data => data)
+      user: user
     }});
     const sub = ref.componentInstance.updatePost.subscribe((newPost: any) => {
       console.log(newPost)

@@ -53,6 +53,21 @@ fields: FormlyFieldConfig[] = [
       }
     },
     {
+      key: 'profileImage',
+      type: 'checkbox',
+      defaultValue: true,
+      templateOptions: {
+        label: 'Profile Image:',
+        change: (field) => { 
+          if(field.formControl?.value){
+            this.user$.subscribe( user => {
+            field.form?.controls.path.setValue(user[0].image)})
+          }
+        }
+      },
+      hideExpression: 'model.fileImage'
+    },
+    {
       key: 'files',
       type: 'dropzone',
       templateOptions: {
