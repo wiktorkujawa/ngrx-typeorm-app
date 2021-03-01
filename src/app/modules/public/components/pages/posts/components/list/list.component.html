@@ -2,13 +2,14 @@
 
 <div class="text-center"> <button  *ngIf="(user$ | async)[0] != null" mat-raised-button color="primary" (click)="addModal()">Add Post</button> </div>
 <div class="text-center"><button *ngIf="(user$ | async)[0] == null" mat-raised-button (click)="AuthDialog(true)">Login to add post</button></div>
-<mat-grid-list [cols]="cols" [gutterSize]="gutter" [ngStyle]="{'margin': margin}" rowHeight="1:1">
+<mat-grid-list [cols]="cols" [gutterSize]="gutter" [ngStyle]="{'margin': margin}" rowHeight="10:16">
   <mat-grid-tile *ngFor="let post of posts$ | async;">
     <app-item-list #child class="h-100 w-100" style="display: grid;
     grid-template-rows: auto 1fr auto;"
       [user]="(user$ | async)[0]"
       [todo]="post"
       (deletePost)="deletePost($event)"
+      (updateModal)="updateModal($event)"
       >
     </app-item-list>
   </mat-grid-tile>

@@ -33,6 +33,13 @@ export const reducer = createReducer(
       error 
     };
   }),
+  on(PostActions.updatePostSuccess, (state, action) => adapter.updateOne({id: action.id, changes: action.post}, state)),
+  on(PostActions.updatePostFailure, (state, {error}) => { 
+    return { 
+      ...state, 
+      error 
+    };
+  }),
   on(PostActions.deletePostSuccess, (state, action) => adapter.removeOne(action.id, state)),
   on(PostActions.deletePostFailure, (state, {error}) => { 
     return { 

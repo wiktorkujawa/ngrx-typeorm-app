@@ -11,6 +11,7 @@ export class ItemListComponent implements OnInit {
   @Input() todo: any;
   @Input() user: any;
   @Output() deletePost: EventEmitter<string> = new EventEmitter();
+  @Output() updateModal : EventEmitter<any> = new EventEmitter();
 
   environment = environment.apiUrl;
 
@@ -27,5 +28,9 @@ export class ItemListComponent implements OnInit {
 
   onDelete(id: string){
     this.deletePost.emit(id)
+  }
+
+  openUpdate(post: any){
+    this.updateModal.emit(post);
   }
 }

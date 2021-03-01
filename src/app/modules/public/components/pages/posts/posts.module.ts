@@ -17,11 +17,12 @@ import { DateTimePickerField } from 'src/app/modules/shared/material/custom-form
 import { AddPostComponent } from './components/add-post/add-post.component';
 import { DropzoneField } from 'src/app/modules/shared/material/custom-formly/dropzone/dropzone.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { UpdatePostComponent } from './components/update-post/update-post.component';
 
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [ListComponent, ItemListComponent, TodoComponent, AddPostComponent],
+  declarations: [ListComponent, ItemListComponent, TodoComponent, AddPostComponent, UpdatePostComponent],
   imports: [
     CommonModule,
     PostsRoutingModule,
