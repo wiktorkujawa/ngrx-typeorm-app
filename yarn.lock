@@ -1430,6 +1430,14 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/gridfs-stream@^0.5.33":
+  version "0.5.33"
+  resolved "https://registry.yarnpkg.com/@types/gridfs-stream/-/gridfs-stream-0.5.33.tgz#f62a4681b479f64ecb86fadf66c73c66e5e2102d"
+  integrity sha512-3E8QdXJ0jZ6hgGzBAnQ4yfZ4GPcxttTAIR8ZiU2phl4zAC74KpYuOqfbef/IY9sDfAbRhd8voHTkuO0UpByFPA==
+  dependencies:
+    "@types/mongodb" "*"
+    "@types/node" "*"
+
 "@types/jasmine@~3.6.0":
   version "3.6.3"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-3.6.3.tgz#824df555b8a5114f91619e78d8f59624d6f23050"
@@ -1450,13 +1458,38 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
-"@types/mongodb@^3.5.27":
+"@types/mongodb@*", "@types/mongodb@^3.5.27":
   version "3.6.8"
   resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.6.8.tgz#f80f0a3022c44d8db659a936434403ca3f4661df"
   integrity sha512-8qNbL5/GFrljXc/QijcuQcUMYZ1iWNcqnJ6tneROwbfU0LsAjQ9bmq3aHi5lWXM4cyBPd2F/n9INAk/pZZttHw==
   dependencies:
     "@types/bson" "*"
     "@types/node" "*"
+
+"@types/mongoose@*":
+  version "5.10.3"
+  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.10.3.tgz#3bc6787245aa8ebbff4ed61da18f4775e0ec52cd"
+  integrity sha512-VfdnaFImXEJZZiuL2ID/ysZs4inOIjxwrAnUgkr5eum2O2BLhFkiSI0i87AwignVva1qWTJ3H3DyM0Rf4USJ4A==
+  dependencies:
+    "@types/mongodb" "*"
+    "@types/node" "*"
+
+"@types/multer-gridfs-storage@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@types/multer-gridfs-storage/-/multer-gridfs-storage-4.0.1.tgz#7d83488322248daf2dfefeaac5edac7402421ba3"
+  integrity sha512-LVn8jrm4Vv4mHn2N96TCMD8mMzrWMLF1Ah9Y24Z8+ZaaL53TkdEatdHW5U61TBMEOhmefpOMj6ujyndzHHIVRg==
+  dependencies:
+    "@types/express" "*"
+    "@types/mongodb" "*"
+    "@types/mongoose" "*"
+    "@types/multer" "*"
+
+"@types/multer@*", "@types/multer@^1.4.5":
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/@types/multer/-/multer-1.4.5.tgz#db0557562307e9adb6661a9500c334cd7ddd0cd9"
+  integrity sha512-9b/0a8JyrR0r2nQhL73JR86obWL7cogfX12augvlrvcpciCo/hkvEsgu80Z4S2g2DHGVXHr8pUIi1VhqFJ8Ufw==
+  dependencies:
+    "@types/express" "*"
 
 "@types/node@*", "@types/node@^14.14.10", "@types/node@^14.14.22":
   version "14.14.28"
