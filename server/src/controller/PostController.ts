@@ -89,7 +89,7 @@ export class PostController {
             files_id: id,
             email: request.body.email,
             fileImage: true,
-            path: 'posts/image/' + filename,
+            path: 'api/posts/image/' + filename,
             content: request.body.content,
             created_at: Date.now(),
             modified_at: Date.now(),
@@ -130,7 +130,7 @@ export class PostController {
             id: new ObjectID(request.params.id),
             files_id: id,
             fileImage: true,
-            path: 'posts/image/' + filename,
+            path: 'api/posts/image/' + filename,
             content: request.body.content,
             modified_at: Date.now(),
           })

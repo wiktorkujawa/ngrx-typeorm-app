@@ -3,37 +3,37 @@ import { PostController } from '../controller/PostController';
 export const postRoute = [
   {
     method: 'get',
-    route: '/posts',
+    route: '/api/posts',
     controller: PostController,
     action: 'all',
   },
   {
     method: 'get',
-    route: '/posts/:id',
+    route: '/api/posts/:id',
     controller: PostController,
     action: 'one',
   },
   {
     method: 'get',
-    route: '/posts/image/:filename',
+    route: '/api/posts/image/:filename',
     controller: PostController,
     action: 'displayImage',
   },
   {
     method: 'put',
-    route: '/posts/update/:id',
+    route: '/api/posts/update/:id',
     controller: PostController,
     action: 'update'
   },
   {
     method: 'post',
-    route: '/posts',
+    route: '/api/posts',
     controller: PostController,
     action: 'save',
   },
   {
     method: 'delete',
-    route: '/posts/:id',
+    route: '/api/posts/:id',
     controller: PostController,
     action: 'remove',
   },
