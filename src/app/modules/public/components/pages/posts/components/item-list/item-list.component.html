@@ -1,8 +1,6 @@
-
-
 <div>
   <mat-toolbar color="background">
-  <button mat-button color="warn" class="delete" *ngIf="user" (click)="onDelete(todo.id)">X</button>
+    <button mat-button color="warn" class="delete" *ngIf="user?.email==todo.email" (click)="onDelete(todo.id)">X</button>
   <button mat-button (click)="onSelect()" *ngIf="todo" class="name">{{todo.content}}</button>
 </mat-toolbar>
 </div>
@@ -11,6 +9,6 @@
 </div>
 <div>
   <mat-toolbar class="d-flex justify-content-center" color="background">
-    <button mat-button (click)="openUpdate(todo)" *ngIf="todo" >Update item</button>
+    <button mat-button (click)="openUpdate(todo)" *ngIf="todo.email==user?.email" >Update item</button>
   </mat-toolbar>
 </div>

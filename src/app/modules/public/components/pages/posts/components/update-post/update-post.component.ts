@@ -35,6 +35,20 @@ export class UpdatePostComponent implements OnInit {
         }
       },
       {
+        key: 'profileImage',
+        type: 'checkbox',
+        defaultValue: true,
+        templateOptions: {
+          label: 'Profile Image:',
+          change: (field) => { 
+            if(field.formControl?.value){
+              field.form?.controls.path.setValue(this.data.user.image)
+            }
+          }
+        },
+        hideExpression: 'model.fileImage'
+      },
+      {
         key: 'files',
         type: 'dropzone',
         templateOptions: {
