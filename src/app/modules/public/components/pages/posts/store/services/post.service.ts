@@ -12,18 +12,18 @@ export class PostService {
   constructor(private http: HttpClient ) { }
 
   getPosts(): Observable<Post[]>{
-    return this.http.get<Post[]>(`${environment.apiUrl}/posts`);
+    return this.http.get<Post[]>(`${environment.apiUrl}/api/posts`);
   }
 
   createPost(model: addPostModel) {
-    return this.http.post<Post>(`${environment.apiUrl}/posts`, model);
+    return this.http.post<Post>(`${environment.apiUrl}/api/posts`, model);
   }
 
   updatePost(id: string,model: any){
-    return this.http.put(`${environment.apiUrl}/posts/update/${id}`, model);
+    return this.http.put(`${environment.apiUrl}/api/posts/update/${id}`, model);
   }
 
   removePost(id: string) {
-    return this.http.delete(`${environment.apiUrl}/posts/${id}`, {responseType: 'text'});
+    return this.http.delete(`${environment.apiUrl}/api/posts/${id}`, {responseType: 'text'});
   }
 }
