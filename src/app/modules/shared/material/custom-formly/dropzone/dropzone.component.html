@@ -1,7 +1,22 @@
 
-<ngx-dropzone class='ngx-dropzone' (change)="onSelect($event)">
-  <ngx-dropzone-label>Drop it here!</ngx-dropzone-label>
-  <ngx-dropzone-image-preview *ngFor="let f of formControl.value" class="ngx-dropzone-preview" ngProjectAs="ngx-dropzone-preview" [removable]="true" (removed)="onRemove()" [file]="f">
-      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-  </ngx-dropzone-image-preview>
+
+<select (change)="onChoose($event)">
+  <option *ngFor="let f of formControl.value; let i = index" [value]="i">{{f.name}}</option>
+</select>
+
+
+<ngx-dropzone [disableClick]='true' class='ngx-dropzone' (change)="onSelect($event)">
+  <!-- <ngx-dropzone-label>Drop it here!</ngx-dropzone-label> -->
+  
+    <div style="position: absolute; left: 50%; transform: translateX(-50%);" *ngFor="let f of formControl.value; let i = index" class="mx-3">
+      <!-- <ngx-dropzone-label [id]='i' (click)="onChoose($event)">{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+      <ngx-dropzone-image-preview *ngIf="selected[i]"  class="ngx-dropzone-preview"  ngProjectAs="ngx-dropzone-preview" [removable]="true" (removed)="onRemove($event)" [file]="formControl.value[i]"></ngx-dropzone-image-preview> 
+    </div>
+    
+  <!-- </ngx-dropzone-image-preview> -->
 </ngx-dropzone>
+<div class="d-flex justify-content-around">
+<div *ngFor="let f of formControl.value; let i = index">
+  <ngx-dropzone-label class="preview my-5" [id]='i' (click)="onChoose($event)">{{ f.name }}</ngx-dropzone-label>
+</div>
+</div>

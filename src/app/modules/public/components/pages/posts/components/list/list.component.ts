@@ -98,7 +98,7 @@ export class ListComponent implements OnInit {
   }
 
   addModal(){
-    const ref = this.dialog.open(AddPostComponent, { width: '60vw',
+    const ref = this.dialog.open(AddPostComponent, { width: '95vw',
     minWidth:"350px",
     panelClass: 'my-dialog',
     });

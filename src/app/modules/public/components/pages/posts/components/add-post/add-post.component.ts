@@ -25,7 +25,7 @@ export class AddPostComponent implements OnInit {
   postData: addPostModel = {
     content:'',
     files_id:'',
-    fileImage: false,
+    fileImage: true,
     email: '',
     files: [],
     path:''
@@ -34,39 +34,39 @@ export class AddPostComponent implements OnInit {
 
   form = new FormGroup({});
 fields: FormlyFieldConfig[] = [
-  {
-    key: 'content',
-    type: 'input',
-    templateOptions: {
-      label: 'Post content',
-      placeholder: 'Enter content',
-      required: true,
-      appearance: 'outline'
-    }
-  },
-    {
-      key: 'fileImage',
-      type: 'checkbox',
-      templateOptions: {
-        label: 'File Image:',
-        required: true,
-      }
-    },
-    {
-      key: 'profileImage',
-      type: 'checkbox',
-      defaultValue: true,
-      templateOptions: {
-        label: 'Profile Image:',
-        change: (field) => { 
-          if(field.formControl?.value){
-            this.user$.subscribe( user => {
-            field.form?.controls.path.setValue(user[0].image)})
-          }
-        }
-      },
-      hideExpression: 'model.fileImage'
-    },
+  // {
+  //   key: 'content',
+  //   type: 'input',
+  //   templateOptions: {
+  //     label: 'Post content',
+  //     placeholder: 'Enter content',
+  //     required: true,
+  //     appearance: 'outline'
+  //   }
+  // },
+    // {
+    //   key: 'fileImage',
+    //   type: 'checkbox',
+    //   templateOptions: {
+    //     label: 'File Image:',
+    //     required: true,
+    //   }
+    // },
+    // {
+    //   key: 'profileImage',
+    //   type: 'checkbox',
+    //   defaultValue: true,
+    //   templateOptions: {
+    //     label: 'Profile Image:',
+    //     change: (field) => { 
+    //       if(field.formControl?.value){
+    //         this.user$.subscribe( user => {
+    //         field.form?.controls.path.setValue(user[0].image)})
+    //       }
+    //     }
+    //   },
+    //   hideExpression: 'model.fileImage'
+    // },
     {
       key: 'files',
       type: 'dropzone',
@@ -76,34 +76,36 @@ fields: FormlyFieldConfig[] = [
       },
       hideExpression: '!model.fileImage',
     },
-    {
-      key: 'path',
-      type: 'input',
-      templateOptions: {
-        label: 'Image URL:',
-        required: true,
-        appearance: 'outline'
-      },
-      hideExpression: 'model.fileImage',
-    }
+    // {
+    //   key: 'path',
+    //   type: 'input',
+    //   templateOptions: {
+    //     label: 'Image URL:',
+    //     required: true,
+    //     appearance: 'outline'
+    //   },
+    //   hideExpression: 'model.fileImage',
+    // }
   ];
 
   
   onSubmit() {
 
-    if( this.postData.fileImage){
-      const message = new FormData();
+    // if( this.postData.fileImage){
+    //   const message = new FormData();
       
-      message.append('post', this.postData.files[0]);
+    //   message.append('post', this.postData.files[0]);
 
-      message.append('content', this.postData.content);
-      message.append('email', this.postData.email);
-      message.append('fileImage', JSON.stringify(this.postData.fileImage));
-      this.addPost.emit(message);
-    }
-    else{
-      this.addPost.emit(this.postData);
-    }
+    //   message.append('content', this.postData.content);
+    //   message.append('email', this.postData.email);
+    //   message.append('fileImage', JSON.stringify(this.postData.fileImage));
+    //   this.addPost.emit(message);
+    // }
+    // else{
+    //   this.addPost.emit(this.postData);
+    // }
+
+    console.log(this.postData.files);
   }
 
   onNoClick() {
